@@ -1,15 +1,11 @@
-# Greenfield
-This is a repo for MKS-39 students' Greenfield project.
-
-# Greenfield Project >>> GOODNEWS.COM <<<
+# Greenfield  >>> GOODNEWS.COM <<<
 This is a repo for MKS-39 students' Greenfield project.
 
 
 STACK:
-————--------------------------------
 React -- Node -- Express -- MongoDB
 
-For front-end design : React-Bookstrap
+Front-end design : React-Bookstrap
 
 TEAM DEVELOPMENT ROLES
 - Mongo Master: Ricardo
