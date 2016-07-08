@@ -24,3 +24,19 @@ export function likePet(petId) {
     })
     .then(checkStatus)
 }
+
+exports.getTone = function(paragraph) {
+  return 
+}
+
+// fetch("http://127.0.0.1:8080/v1.0/users", {
+//       method: 'POST',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         email: 'foo',
+//         pass: 'bar'
+//       })
+//     }).then(response => console.log(response))

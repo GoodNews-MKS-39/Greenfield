@@ -2,10 +2,12 @@
 
 var exports = module.exports;
 exports.checkStatus = function(response){
+	console.log('heeeeeeyyyy');
   return response.json()
     .then(function(data){
       return response.status >= 400
         ? Promise.reject(data)
         : data
+
     })
-}
+};
