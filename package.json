@@ -15,10 +15,11 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify-middleware": "^7.0.0",
+    "es6-promise": "^3.2.1",
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.9.2",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.2.0"
   }
 }

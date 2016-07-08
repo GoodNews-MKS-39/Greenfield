@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch'; 
 
-import { checkStatus } from './lib/util.js'
+import { checkStatus } from './lib/util.js'; 
 
 export function getArticles (startDate, endDate) {
   return fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json', {

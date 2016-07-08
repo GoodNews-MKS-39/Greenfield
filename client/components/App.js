@@ -14,7 +14,7 @@ export default class App extends React.Component{
 
   render() {
     // splash compoment will show by default when mood = null
-
+    
     // UserControls and ArticleList will show when mood = Something
   }
 }
