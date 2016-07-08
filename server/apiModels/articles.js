@@ -1,7 +1,5 @@
 var db = require('../db');
 
-var util = require('./lib/util');
-
 var Article = module.exports;
 
 Article.all = function () {
