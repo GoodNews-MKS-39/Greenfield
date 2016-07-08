@@ -20,6 +20,7 @@
     "nodemon": "^1.9.2",
     "promised-mongo": "^1.2.0",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "watson-developer-cloud": "^1.12.0"
   }
 }

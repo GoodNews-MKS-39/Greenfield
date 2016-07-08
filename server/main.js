@@ -3,6 +3,7 @@ var path = require('path');
 var browserify = require('browserify-middleware');
 var app = express();
 var news = require('./apiModels/news');
+var watson = require('./apiModels/watson');
 
 // app.use(express.static(path.join(__dirname, "../client/public")));
 
@@ -17,6 +18,7 @@ app.get('/', function (req, res) {
   // res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log('stuff');
   news.getArticles(20160708,20160708);
+  //watson.tone_analyzer.tone();
   res.write('news');
 	res.end();
 });
