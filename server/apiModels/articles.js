@@ -24,6 +24,8 @@ Article.create = function (incomingArticles) {
   var attrs = Object.assign({}, incomingArticles);
   var existingArticles = [];
 
+  console.log("about to send to DB");
+
   Article.allIds().then(function(rows){
     existingArticles = rows.map(function(row){
       return row._id;
@@ -38,4 +40,6 @@ Article.create = function (incomingArticles) {
       }
     }
   }
+
+  console.log("all done sending to DB");
 };

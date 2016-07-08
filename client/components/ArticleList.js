@@ -10,7 +10,7 @@ export default class ArticleList extends React.Component{
     this.state = {
       articles: []
     };
-    // 
+    //
   }
 
   componentDidMount(){
@@ -30,11 +30,12 @@ export default class ArticleList extends React.Component{
         { this.state.articles.map((article, index) => {
 
           return <div key={index} className='single_article'>
-            <h3> { article.title }</h3>
-            <img src={ article.image } />
+            <h3> { article.headline.main }</h3>
+            <img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />
             <p> { article.paragraph } </p>
 
           </div>
         })}
       </div>
   )}
+}
