@@ -1,8 +1,11 @@
-import fetch from 'isomorphic-fetch'
+var fetch = require('isomorphic-fetch');
+//var checkStatus = require('checkStatus');
+//var checkStatus = require('checkStatus');
+//module exports??
+// import { checkStatus } from './lib/util.js'
+var exports = module.exports;
 
-import { checkStatus } from './lib/util.js'
-
-export function getArticles (startDate, endDate) {
+exports.getArticles = function(startDate, endDate) {
   return fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
     method: 'GET',
     headers: {
@@ -10,5 +13,17 @@ export function getArticles (startDate, endDate) {
       'begin_date': startDate,
       'end_date': endDate
     }
-  }).then(checkStatus)
+  }).then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    })
+    .then(function(stories) {
+        console.log('body', stories.response.docs);
+        stories.response.map(function(story) {
+          return {url: web_url, paragraph: lead_paragraph, multimedia: multimedia, headline: headline, }
+        })
+    });
 }
+web_url, snippet, source, multimedia, headline, keywords, _id, word_count
