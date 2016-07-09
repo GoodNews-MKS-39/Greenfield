@@ -1,26 +1,23 @@
-import fetch from 'isomorphic-fetch'
+//getting data from watson, need to format
 
-import { checkStatus } from './lib/util.js'
+var watson = require('watson-developer-cloud');
+var apiKeys = require('./lib/apiKeys');
+var news = require('./news.js')
 
-export function fetchShops() {
-  return fetch('http://pet-shop.api.mks.io/shops/1')
+var exports = module.exports;
 
-    .then(checkStatus)
-    }
+var  tone_analyzer = watson.tone_analyzer({
+  username: "ca6d2cfb-3b94-4648-bbf7-f0bf6896c61c",
+  password: apiKeys.watsonPassword,
+  version: 'v3',
+  version_date: '2016-05-19'
+});
 
+tone_analyzer.tone({ text: 'Greetings from Watson Developer Cloud!' },
+  function(err, tone) {
+    if (err)
+      console.log(err);
+    else
+      console.log(JSON.stringify(tone, null, 2));
+});
 
-export function fetchPets() {
-  return fetch('http://pet-shop.api.mks.io/shops/1/pets')
-    .then(checkStatus)
-}
-
-export function likePet(petId) {
-  return fetch('http://pet-shop.api.mks.io/shops/1/pets/' + petId + '/like', {
-      method: 'POST',
-      headers: {
-       'Content-Type': 'application/json',
-       'Authorization': `API token="${localStorage.apiToken}"`
-      }
-    })
-    .then(checkStatus)
-}
