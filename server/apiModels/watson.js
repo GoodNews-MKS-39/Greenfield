@@ -19,7 +19,8 @@ exports.toneCheck = function(input) {
     if (err)
       console.log(err);
     else
-      console.log(JSON.stringify(tone, null, 2));
+    var inputTones = tone.document_tone.tone_categories;
+      console.log('inputTones from toneCheck function: ', inputTones);
 	})
 }
 

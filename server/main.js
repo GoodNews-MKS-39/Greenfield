@@ -29,9 +29,12 @@ app.post('/datedArticles', function(req, res){
   });
 });
 
-watson.toneCheck('what is going on? I am very confused.');
-//news.getArticles(20160711, 20160711, 4);
-//news.getOneHundred(20160712, 20160712); 
+//call to NYT api ->
+//news.getFifty(20160712, 20160712); 
+
+//call to Watson tone-analyzer ->
+//watson.toneCheck('Pass me the Articles to check!');
+
 
 var port = process.env.PORT || 4000;
 app.listen(port, function() {
