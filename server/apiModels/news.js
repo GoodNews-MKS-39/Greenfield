@@ -12,7 +12,7 @@ exports.getArticles = function(startDate, endDate, byTen) {
   rp.get({
   url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
   qs: {
-    'api-key': "4744a090e2ed46cfb27f47d7efba87ca",
+    'api-key': apiKeys.nytKey,
     'begin_date': startDate,
     'end_date': endDate,
     'page': byTen
