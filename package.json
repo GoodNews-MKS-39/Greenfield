@@ -17,6 +17,7 @@
     "babelify": "^7.3.0",
     "body-parser": "^1.15.2",
     "browserify-middleware": "^7.0.0",
+    "es6-promise": "^3.2.1",
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.9.2",

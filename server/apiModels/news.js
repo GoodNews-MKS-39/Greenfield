@@ -2,23 +2,26 @@ var fetch = require('isomorphic-fetch');
 var Article = require('./articles');
 var util = require('./lib/util.js');
 var apiKeys = require('./lib/apiKeys');
-//TODO figure out requiring/exports, hide api key
+//request-promise module
+var rp = require('request-promise');
+
 
 var exports = module.exports;
-exports.getArticles = function(startDate, endDate) {
+exports.getArticles = function(startDate, endDate, byTen) {
   //call to New York Times API
-  return fetch('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
-    method: 'GET',
-    headers: {
-      'api-key': apiKeys.nytKey,
-      'begin_date': startDate,
-      'end_date': endDate
-    }
-  }).then(function(response) {
+  rp.get({
+  url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+  qs: {
+    'api-key': "4744a090e2ed46cfb27f47d7efba87ca",
+    'begin_date': startDate,
+    'end_date': endDate,
+    'page': byTen
+  },
+}).then(function(response) {
     if (response.status >= 400) {
       throw new Error("Bad response from server");
     }
-    return response.json();
+    return JSON.parse(response);
   })
   .then(function(stories) {
       var storyArray = stories.response.docs.map(function(story) {
@@ -27,7 +30,22 @@ exports.getArticles = function(startDate, endDate) {
       //create DB with desired article data
       Article.create(storyArray);
   })
-  .then(function () {
-    util.checkStatus();
-  });
 }
+
+//the New York Times api returns ten articles per GET request, getOneHundred makes ten successive requests
+exports.getOneHundred = function(startDate, endDate) {
+  var count = 0;
+  //the NYT public api has a call-limit of 5 per second,
+  //we can put a timeout for another 5 if desired
+  while (count < 5) {
+    exports.getArticles(startDate, endDate, count);
+    count++;
+  }
+}
+
+
+
+
+
+
+
