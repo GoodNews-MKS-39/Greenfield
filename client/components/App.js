@@ -12,13 +12,13 @@ export default class App extends React.Component{
     // state variable to control what gets displayed. eg mood = null; (or cheerful)
   }
 
-  changeMood() {
-    this.setState({mood: 'joy'});
+  changeMood(value) {
+    this.setState({mood: value});
   }
 
   render() {
         if (this.state.mood === null) {
-          return (<Splash changeMood={this.changeMood.bind(this)} />);
+          return (<Splash changeMood={this.changeMood} />);
         } else {
           return (<ArticleList />);
         }

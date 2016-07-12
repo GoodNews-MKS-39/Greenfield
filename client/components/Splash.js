@@ -8,8 +8,14 @@ export default class Splash extends React.Component{
     // this.props: {
 
     // }
+  }
 
-
+  _onChangeHandler(e) {
+    var self = this;
+    this.setState({value: e.target.value}, function(){
+      // Makes sure that the state has been set at this stage
+      self.props.changeMood(self.state.value);
+    });
   }
 
   render(){
@@ -19,9 +25,14 @@ export default class Splash extends React.Component{
     <div>
       <h1>Good News!!!</h1>
       <div>
-        <h3>Today's Stories</h3>
+        <h3>Todays Stories</h3>
         Current time: {now.toTimeString()}
-        <button className='moodSetter' onClick={this.props.changeMood.bind(this)}>Set Your Mood!</button>
+        // <button className='moodSetter' onClick={this.props.changeMood.bind(this)}>Set Your Mood!</button>
+        <select className='moodSetter' onChange={this._onChangeHandler} value={this.state.value}>
+            <option value="joy">"joy"</option>
+            <option value="sadness">"sadness"</option>
+            <option value="anger">"anger"</option>
+        </select>
       </div>
     </div>);
   }
