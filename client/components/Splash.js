@@ -1,6 +1,5 @@
 // this is the 'landing page' component
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class Splash extends React.Component{
   constructor(props) {
@@ -8,12 +7,9 @@ export default class Splash extends React.Component{
     // this.props: {
 
     // }
-
-
   }
 
   render(){
-
   const now = new Date();
   return (
     <div>
@@ -21,15 +17,9 @@ export default class Splash extends React.Component{
       <div>
         <h3>Today's Stories</h3>
         Current time: {now.toTimeString()}
-        <button className='moodSetter' onClick={this.props.changeMood.bind(this)}>Set Your Mood!</button>
+        <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>Set Your Mood!</button>
       </div>
     </div>);
   }
 
-
-//  ReactDOM.render() {
-//     // welcome people to our site, and have button to see articles and set mood = cheerful;
-//     // login form
-//     <Splash />, document.getElementById('app');
-//   }
 }
