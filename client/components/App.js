@@ -1,26 +1,27 @@
 // this is the highest level component
 import React from 'react';
-import Splash from './Splash';
-import ArticleList from './ArticleList';
+import Splash from './Splash.js';
+import ArticleList from './ArticleList.js';
 
 export default class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      // state variable to control what gets displayed. eg mood = null; (or cheerful)
       mood: null
     };
-    // state variable to control what gets displayed. eg mood = null; (or cheerful)
-  }
-
-  changeMood() {
-    this.setState({mood: 'joy'});
   }
 
   render() {
-        if (this.state.mood === null) {
-          return (<Splash changeMood={this.changeMood.bind(this)} />);
-        } else {
-          return (<ArticleList />);
-        }
+    if (this.state.mood === null) {
+      return (<Splash _changeMood={this._changeMood.bind(this)} />);
+    } else {
+      return (<ArticleList />);
+    }
   }
+
+  _changeMood() {
+    this.setState({mood: 'joy'});
+  }
+
 }
