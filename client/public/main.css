@@ -1,0 +1,123 @@
+/*
+ font options
+font-family: 'Merriweather', serif;
+font-family: 'Open Sans', sans-serif;
+
+Add col classes to div?
+docs: https://react-bootstrap.github.io/getting-started.html;
+<Col xs={6} md={4} />
+*/
+
+
+/* ALL EMOTIONS */
+body {
+  text-align: center;
+}
+
+h3 {
+  font-family: 'Merriweather', serif;
+  font-weight: bold;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.single_article {
+  width: 30%;
+}
+
+.single_article img{
+  width: 100%;
+}
+
+
+
+/* SPLASH PAGE CSS*/
+.moodnews_logo{
+  width: 555px;
+  margin: auto;
+  padding: 15px;
+  display: block;
+}
+
+p.lead {
+  font-size: 24px;
+  font-family: 'Merriweather', serif;
+}
+
+/* add background img to splash page*/
+.splashpage-background {
+  background: url('img/news_background.jpg') no-repeat center center fixed;;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.news_div-splashpage {
+  background-color: rgba(255,255,255, .9);
+  width: 50%;
+  margin: 80px auto;
+  padding: 20px;
+
+}
+
+/* JOY CSS */
+
+.single_article-happy h3 {
+  color: #005B9A;
+}
+
+
+/* SAD CSS */
+.single_article-sad h3 {
+
+}
+
+
+
+/* ANGRY CSS */
+.single_article-angry h3 {
+
+}
+
+
+
+/* DISGUST CSS */
+.single_article-disgust h3 {
+
+}
+
+
+
+/* FEAR CSS */
+.single_article-fear h3 {
+
+}
+
+
+
+
+
+
+/*<div className='daily_articles'>
+ <h1> {"Top news of the day"}</h1>
+ <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
+ { this.state.articles.map((article, index) => {
+
+   return <div key={index} className='single_article'>
+     <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
+     <img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />
+     <p> { article.paragraph } </p>
+
+   </div>
+ })}
+</div>
