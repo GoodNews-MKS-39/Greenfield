@@ -27,7 +27,7 @@ exports.getArticles = function(startDate, endDate, byTen) {
   })
   .then(function(stories) {
       var storyArray = stories.response.docs.map(function(story) {
-        return {url: story.web_url, paragraph: story.lead_paragraph, multimedia: story.multimedia, headline: story.headline, keywords: story.keywords, pub_date: story.pub_date, id: story._id, word_count: story.word_count}
+        return {url: story.web_url, paragraph: story.lead_paragraph, multimedia: story.multimedia, headline: story.headline, keywords: story.keywords, pub_date: new Date(story.pub_date), id: story._id, word_count: Number(story.word_count)}
 
       });
       console.log(storyArray);
