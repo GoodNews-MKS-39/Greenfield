@@ -28,10 +28,10 @@ export default class ArticleList extends React.Component{
       <h1> {"Top news of the day"}</h1>
       <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
       { this.state.articles.map((article, index) => {
-
+        let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : '';
         return <div key={index} className='single_article'>
           <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
-          <img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />
+          {img}
           <p> { article.paragraph } </p>
 
         </div>
