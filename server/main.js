@@ -5,7 +5,8 @@ var watson = require('./apiModels/watson');
 var news = require('./apiModels/news');
 var app = express();
 var Article = require('./apiModels/articles');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var cool = require('cool-ascii-faces');
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(bodyParser.json());
@@ -15,6 +16,10 @@ app.get('/app-bundle.js',
     transform: [ [ require('babelify'), { presets: ["es2015", "react"] } ] ]
   })
 );
+
+app.get('/cool', function(request, response) {
+  response.send(cool());
+});
 
 app.get('/articles', function(req, res){
   Article.all().then(function(articles){
