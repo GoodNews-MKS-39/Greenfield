@@ -7,16 +7,16 @@ Article.all = function () {
 };
 
 Article.allIds = function () {
-  return db.collection('articles').find({}, {_id: 1});
+  return db.collection('articles').find({}, {id: 1});
 };
 
 Article.findByDate = function (startDate, endDate) {
-  return db.collection('articles').find({
-    pubDate: {
-      $gte: ISODate(startDate),
-      $lt: ISODate(endDate)
+  return db.collection('articles').find({ 
+    pub_date: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate)
     }
-  });
+  })
 };
 
 Article.create = function (incomingArticles) {
@@ -28,14 +28,14 @@ Article.create = function (incomingArticles) {
 
   Article.allIds().then(function(rows){
     existingArticles = rows.map(function(row){
-      return row._id;
+      return row.id;
     });
     insert();
   });
 
   function insert() {
     for (article of incomingArticles) {
-      if (existingArticles.indexOf(article._id) < 0) {
+      if (existingArticles.indexOf(article.id) < 0) {
         db.collection('articles').insert(article);
       }
     }

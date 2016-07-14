@@ -7,17 +7,21 @@ var news = require('./news.js')
 var exports = module.exports;
 
 var  tone_analyzer = watson.tone_analyzer({
-  username: "ca6d2cfb-3b94-4648-bbf7-f0bf6896c61c",
+  username: "93cbe6f4-4896-4c87-a5e8-9533add71bb2",
   password: apiKeys.watsonPassword,
   version: 'v3',
   version_date: '2016-05-19'
 });
 
-tone_analyzer.tone({ text: 'Greetings from Watson Developer Cloud!' },
+exports.toneCheck = function(input) {
+	tone_analyzer.tone({ text: input },
   function(err, tone) {
     if (err)
       console.log(err);
     else
-      console.log(JSON.stringify(tone, null, 2));
-});
+    var inputTones = tone.document_tone.tone_categories;
+      console.log('inputTones from toneCheck function: ', inputTones);
+	})
+}
+
 

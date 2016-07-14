@@ -8,8 +8,10 @@ Date.prototype.yyyymmdd = function() {
 };
 
 var date = new Date();
-date = date.yyyymmdd();
+today = date.yyyymmdd();
 
-console.log('date', date);
+console.log('today', today);
 
-news.getArticles(20160708,20160708);
+news.getArticles(today, today);
+
+setTimeout(process.exit, 5000);

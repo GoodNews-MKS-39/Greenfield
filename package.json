@@ -1,25 +1,39 @@
 {
   "name": "good-news",
   "version": "1.0.0",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoodNews-MKS-39/Greenfield.git"
+  },
+  "description": "This is a repo for MKS-39 students' Greenfield project.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server/main.js --ignore client/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "",
+  "license": "ISC",
   "dependencies": {
     "babel-core": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
+    "body-parser": "^1.15.2",
     "browserify-middleware": "^7.0.0",
+    "cool-ascii-faces": "1.3.4",
+    "es6-promise": "^3.2.1",
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.9.2",
     "promised-mongo": "^1.2.0",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
-  }
+    "react-dom": "^15.1.0",
+    "watson-developer-cloud": "^1.12.2"
+  },
+  "bugs": {
+    "url": "https://github.com/GoodNews-MKS-39/Greenfield/issues"
+  },
+  "homepage": "https://github.com/GoodNews-MKS-39/Greenfield#readme",
+  "devDependencies": {},
+  "keywords": []
 }
