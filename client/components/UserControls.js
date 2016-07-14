@@ -17,14 +17,14 @@ export default class UserControls extends React.Component{
           <input
             type="text"
             name="startDate"
-            placeholder="YYYYMMDD - Start Date"
+            placeholder="Start Date"
             value={this.state.startDate}
             onInput={this._handleStartDateInput.bind(this)}
           />
           <input
             type="text"
             name="endDate"
-            placeholder="YYYYMMDD - End Date"
+            placeholder="End Date"
             value={this.state.endDate}
             onInput={this._handleEndDateInput.bind(this)}
           />

@@ -17,7 +17,7 @@ export default class Splash extends React.Component{
       <div>
         <h3>Today's Stories</h3>
         Current time: {now.toTimeString()}
-        <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>Set Your Mood!</button>
+        <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>It's great to be alive!</button>
       </div>
     </div>);
   }
