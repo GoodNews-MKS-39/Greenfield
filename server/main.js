@@ -30,10 +30,10 @@ app.post('/datedArticles', function(req, res){
 });
 
 //call to NYT api ->
-//news.getFifty(20160712, 20160712); 
+news.getFifty(20160712, 20160712); 
 
 //call to Watson tone-analyzer ->
-//watson.toneCheck('Pass me the Articles to check!');
+watson.toneCheck('Pass me the Articles to check!');
 
 
 var port = process.env.PORT || 4000;
