@@ -32,7 +32,7 @@ export default class ArticleList extends React.Component{
         return <div key={index} className='single_article'>
           <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
           {img}
-          <p> { article.paragraph } </p>
+          <p> { article.paragraph } <a href={article.url} target="_blank">(Read more)</a></p>
 
         </div>
       })}

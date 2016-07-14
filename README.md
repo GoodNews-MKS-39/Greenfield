@@ -28,7 +28,7 @@ TEAM DEVELOPMENT ROLES
 
   -> git checkout -b feat3  OR  -> git checkout -b bug11
 
-3. Make changes and commit to your feature branch.
+3. Make changes and stage them for a commit to your feature branch.
 
   -> git add -p
 
