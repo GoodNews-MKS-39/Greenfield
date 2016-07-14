@@ -25,12 +25,7 @@ exports.getArticles = function(startDate, endDate, byTen) {
   })
   .then(function(stories) {
       var storyArray = stories.response.docs.map(function(story) {
-<<<<<<< d3645d437f98c703a5d9f0c84cc7a53600604635
         return {url: story.web_url, paragraph: story.lead_paragraph, multimedia: story.multimedia, headline: story.headline, keywords: story.keywords, pub_date: new Date(story.pub_date), id: story._id, word_count: Number(story.word_count)}
-=======
-        //format response
-        return {url: story.web_url, paragraph: story.lead_paragraph, multimedia: story.multimedia, headline: story.headline, keywords: story.keywords, pub_date: story.pub_date, id: story._id, word_count: story.word_count}
->>>>>>> watson data formatted, NYT api with consecutive calls
       });
       //create DB with desired article data
       Article.create(storyArray);
