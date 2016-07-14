@@ -24,20 +24,28 @@ export default class ArticleList extends React.Component{
   render() {
     // show all articles for the given time period (today) filtered for the mood variable in the app component
     return (
-    <div className='daily_articles'>
-      <h1> {"Top news of the day"}</h1>
-      <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
-      { this.state.articles.map((article, index) => {
-        let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : '';
-        return <div key={index} className='single_article'>
-          <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
-          {img}
-          <p> { article.paragraph } <a href={article.url} target="_blank">(Read more)</a></p>
-
-        </div>
-      })}
-    </div>
-  )}
+      <div className='daily_articles'>
+        <div className="article_header"> 
+          <h1> {"Good News"}</h1>
+          <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
+        </div> 
+        { this.state.articles.map((article, index) => {
+          let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : '';
+          return (
+            <div key={index} className="col-sm-6 col-md-4">
+              <div className='single_article'>
+                {img}
+                <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
+                <div className="article_p">
+                  <p> { article.paragraph } <a href={article.url} target="_blank">(Read more)</a> </p>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
   _fetchByDate(startDate, endDate) {
     if (startDate && endDate) {

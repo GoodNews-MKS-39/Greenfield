@@ -12,14 +12,14 @@ export default class Splash extends React.Component{
   render(){
   const now = new Date();
   return (
-    <div>
-      <h1>Good News!!!</h1>
-      <div>
-        <h3>Today's Stories</h3>
-        Current time: {now.toTimeString()}
-        <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>It's great to be alive!</button>
+    <div className="splashpage_background">
+      <div className="news_div-splashpage">
+      <h1>Good News</h1>
+        <div>
+          <h3>{now.toDateString()}</h3>
+          <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>Set Your Mood!</button>
+        </div>
       </div>
     </div>);
   }
-
 }
