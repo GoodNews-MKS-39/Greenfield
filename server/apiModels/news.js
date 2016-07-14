@@ -4,6 +4,8 @@ var util = require('./lib/util.js');
 var apiKeys = require('./lib/apiKeys');
 //request-promise module
 var rp = require('request-promise');
+var watson = require('./watson');
+
 
 
 var exports = module.exports;
@@ -29,6 +31,12 @@ exports.getArticles = function(startDate, endDate, byTen) {
 
       });
       console.log(storyArray);
+      // var storyTones = storyArray.map(function(story) {
+      //   console.log('story.paragraph:', story.paragraph);
+      //   var tone = watson.toneCheck(story.paragraph);
+      // })
+
+      //console.log('storyTones:', storyTones);
       //create DB with desired article data
       Article.create(storyArray);
   })
