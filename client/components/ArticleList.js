@@ -22,17 +22,19 @@ export default class ArticleList extends React.Component{
   }
 
   render() {
-    // show all articles for the given time period (today) filtered for the mood variable in the app component
+    // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className='daily_articles'>
         <div className="article_header"> 
           <h1> {"Good News"}</h1>
           <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
         </div> 
-        { this.state.articles.map((article, index) => {
+        { this.state.articles
+          .filter(article => article[this.props.mood] > 0.3)
+          .map((article) => {
           let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : '';
           return (
-            <div key={index} className="col-sm-6 col-md-4">
+            <div key={article._id} className="col-sm-6 col-md-4">
               <div className='single_article'>
                 {img}
                 <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
