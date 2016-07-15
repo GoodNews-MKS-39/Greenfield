@@ -4,9 +4,6 @@ import React from 'react';
 export default class Splash extends React.Component{
   constructor(props) {
     super(props);
-    // this.props: {
-
-    // }
   }
 
   render(){
@@ -17,7 +14,7 @@ export default class Splash extends React.Component{
       <h1>Good News</h1>
         <div>
           <h3>{now.toDateString()}</h3>
-          <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>Set Your Mood!</button>
+          <button className='moodSetter' onClick={this.props._changeMood.bind(this)}>It's great to be alive!</button>
         </div>
       </div>
     </div>);

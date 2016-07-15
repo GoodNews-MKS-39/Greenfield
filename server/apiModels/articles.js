@@ -19,12 +19,39 @@ Article.findByDate = function (startDate, endDate) {
   })
 };
 
+Article.noTone = function () {
+  //console.log('getting stories without tones');
+  return db.collection('articles').find({ 
+    tones: null
+  })
+};
+
+Article.addTone = function (_id, tones) {
+  return db.collection('articles').update({ 
+    "_id" : _id },
+    { $set: {
+      "tones" : tones,
+      "anger" : tones[0]['tones'][0]['score'],
+      "disgust" : tones[0]['tones'][1]['score'],
+      "fear" : tones[0]['tones'][2]['score'],
+      "joy" : tones[0]['tones'][3]['score'],
+      "sadness" : tones[0]['tones'][4]['score'],
+      "analytical" : tones[1]['tones'][0]['score'],
+      "confident" : tones[1]['tones'][1]['score'],
+      "tentative" : tones[1]['tones'][2]['score'],
+      "openness" : tones[2]['tones'][0]['score'],
+      "conscientiousness" : tones[2]['tones'][1]['score'],
+      "extraversion" : tones[2]['tones'][2]['score'],
+      "agreeableness" : tones[2]['tones'][3]['score'],
+      "emotional_range" : tones[2]['tones'][4]['score'],
+    }
+  })
+};
+
 Article.create = function (incomingArticles) {
   // Copy to avoid mutation
   var attrs = Object.assign({}, incomingArticles);
   var existingArticles = [];
-
-  console.log("about to send to DB");
 
   Article.allIds().then(function(rows){
     existingArticles = rows.map(function(row){
@@ -41,5 +68,4 @@ Article.create = function (incomingArticles) {
     }
   }
 
-  console.log("all done sending to DB");
 };

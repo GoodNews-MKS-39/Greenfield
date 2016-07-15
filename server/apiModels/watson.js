@@ -2,7 +2,8 @@
 
 var watson = require('watson-developer-cloud');
 var apiKeys = require('./lib/apiKeys');
-var news = require('./news.js')
+var news = require('./news.js');
+var Article = require('./articles');
 
 var exports = module.exports;
 
@@ -13,15 +14,13 @@ var  tone_analyzer = watson.tone_analyzer({
   version_date: '2016-05-19'
 });
 
-exports.toneCheck = function(input) {
-	tone_analyzer.tone({ text: input },
+exports.toneCheck = function(_id, input) {
+  tone_analyzer.tone({ text: input },
   function(err, tone) {
     if (err)
       console.log(err);
     else
     var inputTones = tone.document_tone.tone_categories;
-      console.log('inputTones from toneCheck function: ', inputTones);
-	})
+    Article.addTone(_id, inputTones);
+  })
 }
-
-
