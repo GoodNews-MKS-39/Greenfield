@@ -31,8 +31,7 @@ Article.noTone = function () {
 
 // add tone scores from Watson to database
 Article.addTone = function (_id, tones) {
-  return db.collection('articles').update({ 
-    "_id" : _id },
+  return db.collection('articles').update({ "_id" : _id },
     { $set: {
       "tones" : tones,
       "anger" : tones[0]['tones'][0]['score'],
@@ -78,27 +77,27 @@ Article.create = function (incomingArticles) {
 // removes articles that don't have a summary paragraph
 Article.cleanUp = function() {
   return db.collection('articles').find({ 
-    paragraph: /!--/
-  }).then(function(obituaries){
-    obituaries.forEach(function(obituary){
+    paragraph: /!--/ })
+  .then(function(obituaries) {
+    obituaries.forEach(function(obituary) {
       db.collection('articles').remove({ _id: obituary._id});
     });
   });
 
   return db.collection('articles').find({ 
-    paragraph: null
-  }).then(function(empties){
-    empties.forEach(function(empty){
+    paragraph: null })
+  .then(function(empties) {
+    empties.forEach(function(empty) {
       db.collection('articles').remove({ _id: empty._id});
     });
   });
 
   return db.collection('articles').find({ 
-    paragraph: ''
-  }).then(function(blanks){
-    blanks.forEach(function(blank){
+    paragraph: '' })
+  .then(function(blanks) {
+    blanks.forEach(function(blank) {
       db.collection('articles').remove({ _id: blank._id});
     });
   });
 
-}
+};

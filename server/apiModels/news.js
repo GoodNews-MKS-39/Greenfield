@@ -8,8 +8,8 @@ var exports = module.exports;
 exports.getArticles = function(startDate, endDate, byTen) {
   // call to New York Times API
   rp.get({
-  url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-  qs: {
+    url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+    qs: {
       'api-key': apiKeys.nytKey,
       'begin_date': startDate,
       'end_date': endDate,
@@ -31,10 +31,10 @@ exports.getArticles = function(startDate, endDate, byTen) {
     // send data to database model
     Article.create(storyArray);
   })
-  .then(function(){
+  .then(function() {
     Article.noTone()
-    .then(function(noTones){
-      noTones.forEach(function(story){
+    .then(function(noTones) {
+      noTones.forEach(function(story) {
         if (!!story) watson.toneCheck(story._id, story.paragraph);
       });
     });

@@ -1,3 +1,4 @@
+//getting data from watson, need to format
 var watson = require('watson-developer-cloud');
 var apiKeys = require('./lib/apiKeys');
 var news = require('./news.js');
@@ -25,4 +26,4 @@ exports.toneCheck = function(_id, input) {
       if (inputTones) Article.addTone(_id, inputTones);
     }
   })
-}
+};
