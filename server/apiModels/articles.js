@@ -16,14 +16,14 @@ Article.findByDate = function (startDate, endDate) {
         $gte: new Date(startDate),
         $lte: new Date(endDate)
     }
-  })
+  });
 };
 
 Article.noTone = function () {
   //console.log('getting stories without tones');
   return db.collection('articles').find({ 
     tones: null
-  })
+  });
 };
 
 Article.addTone = function (_id, tones) {
@@ -69,3 +69,31 @@ Article.create = function (incomingArticles) {
   }
 
 };
+
+Article.cleanUp = function() {
+  console.log('cleaning up');
+  return db.collection('articles').find({ 
+    paragraph: null
+  }).then(function(empties){
+    empties.forEach(function(empty){
+      db.collection('articles').remove({ _id: empty._id});
+    });
+  });
+
+  return db.collection('articles').find({ 
+    paragraph: ''
+  }).then(function(blanks){
+    blanks.forEach(function(blank){
+      db.collection('articles').remove({ _id: blank._id});
+    });
+  });
+
+  return db.collection('articles').find({ 
+    paragraph: /<!-- /
+  }).then(function(obituaries){
+    obituaries.forEach(function(obituary){
+      db.collection('articles').remove({ _id: obituary._id});
+    });
+  });
+
+}

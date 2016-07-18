@@ -17,10 +17,13 @@ var  tone_analyzer = watson.tone_analyzer({
 exports.toneCheck = function(_id, input) {
   tone_analyzer.tone({ text: input },
   function(err, tone) {
-    if (err)
+    if (err) {
+      console.log('_id', _id, 'input', input)
       console.log(err);
-    else
-    var inputTones = tone.document_tone.tone_categories;
-    Article.addTone(_id, inputTones);
+    }
+    else {
+      var inputTones = tone.document_tone.tone_categories;
+      if (inputTones) Article.addTone(_id, inputTones);
+    }
   })
 }

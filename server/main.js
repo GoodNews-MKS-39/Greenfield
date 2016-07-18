@@ -1,11 +1,10 @@
 var express = require('express');
 var path = require('path');
 var browserify = require('browserify-middleware');
-var watson = require('./apiModels/watson');
+var news = require('./apiModels/news');
 var app = express();
 var Article = require('./apiModels/articles');
 var bodyParser = require('body-parser');
-var cool = require('cool-ascii-faces');
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(bodyParser.json());
@@ -28,9 +27,11 @@ app.get('/articles', function(req, res){
 
 app.post('/datedArticles', function(req, res){
   console.log('req.body', req.body);
-  Article.findByDate(req.body.startDate, req.body.endDate).then(function(articles){
-    res.status(200).send(articles);
-  });
+  news.getFifty(req.body.startDate, req.body.endDate, 0, function(){
+    Article.findByDate(req.body.startDate, req.body.endDate).then(function(articles){
+      res.status(200).send(articles);
+    });
+  }); 
 });
 
 var port = process.env.PORT || 4000;

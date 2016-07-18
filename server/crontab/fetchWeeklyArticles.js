@@ -1,4 +1,5 @@
 var news = require('../apiModels/news');
+var Article = require('../apiModels/articles');
 
 // make Date format be NYT friendly
 Date.prototype.yyyymmdd = function() {
@@ -7,18 +8,17 @@ Date.prototype.yyyymmdd = function() {
   return [this.getFullYear(), mm, dd].join('');
 };
 
-var date = new Date();
-var last_week = new Date(date.getTime() - (7 * 24 * 60 * 60 * 1000));
-var end = date.yyyymmdd();
-var start = last_week.yyyymmdd();
+var today = new Date();
+var last_week = new Date(today.getTime() - (7 * 24 * 60 * 60 * 1000));
 
-console.log('date range', start, end);
+console.log('date range', last_week, today);
 
 //call to NYT api ->
 setInterval(function(){
-  for (var count = 0; count < 70; count+= 5) {
-    news.getFifty(start, end, count);
+  for (var count = 0; count < 100; count+= 5) {
+    news.getFifty(last_week, today, count);
   }
-}, 1200);
+}, 3000);
 
-setTimeout(process.exit, 10000);
+setTimeout(Article.cleanUp, 6500);
+setTimeout(process.exit, 7000);
