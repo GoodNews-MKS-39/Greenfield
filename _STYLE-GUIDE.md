@@ -1,7 +1,7 @@
 *This style guide is adapted from W3School's style guide.
 # Variable Names
-- We use camelCase for identifier names (variables and functions).
-- All names start with a letter.
+- We use camelCase for identifier names (variables and functions). However, react components start with a capital letter.
+- All names start with a letter. However, react methods that are not built-in will start with an underscore.
 - At the bottom of this file, you will find a wider discussion about naming rules.
 ```javascript
 firstName = "John";
