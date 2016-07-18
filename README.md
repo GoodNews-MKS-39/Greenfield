@@ -3,7 +3,6 @@ This is a repo for MKS-39 students' Greenfield project.
 
 Please see our CONTRIBUTIONS.md if you would like to contribute.
 
-
 STACK:
 ————--------------------------------
 React -- Node -- Express -- MongoDB
@@ -11,14 +10,26 @@ React -- Node -- Express -- MongoDB
 For front-end design : React-Bookstrap
 
 TEAM DEVELOPMENT ROLES
-- Mongo Master: Ricardo
-- Express Expert: Tim 
-- Front End / React: Kyhan
-- React Reverend: Tony
-- Full Stack Savant: Ashley
+- Full Stack: Ricardo
+- API's: Tim 
+- React: Kyhan
+- React: Tony
+- CSS: Ashley
 
+# Project Summary
+The goal of this project is to create a news website that only displays positive articles. Using the New York Times api we can gather stories dating back to 1851. The data returned from these calls is stored with MongoDB and includes a brief summary of each article among other information. IBM's Watson has an api that analyzes a snippet of text and returns scores from 0-1 based on the existence of 5 emotions: anger, fear, joy, sadness, and disgust. We use these scores as a filter by passing each article summary into Watson and rendering only the ones with a 'joy' score above a certain number (0.3).
 
-#gitGeneral Workflow
+NYT - https://developer.nytimes.com/
+Watson - http://www.ibm.com/watson/developercloud/tone-analyzer.html
+
+# Backlog
+- Backdating
+- Add news sources
+- Search by keyword
+- Add authentication
+- Filter for other 4 emotions (display angry articles)
+
+# gitGeneral Workflow
 
 1. Clone down the master directly (do not fork):
 
@@ -177,3 +188,4 @@ no problem getting your changes merged in.
 [squashed]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 <!-- A link to your directory of tests on github -->
 [tests]: tests/
+
