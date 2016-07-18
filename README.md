@@ -12,8 +12,8 @@ For front-end design : React-Bookstrap
 TEAM DEVELOPMENT ROLES
 - Full Stack: Ricardo
 - API's: Tim 
-- React: Kyhan
-- React: Tony
+- Front End / React: Kyhan
+- Front End / React: Tony
 - CSS: Ashley
 
 # Project Summary
