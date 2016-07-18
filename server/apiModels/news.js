@@ -35,25 +35,28 @@ exports.getArticles = function(startDate, endDate, byTen) {
     Article.noTone()
     .then(function(noTones){
       noTones.forEach(function(story){
-        watson.toneCheck(story._id, story.paragraph)
+        if (!!story) watson.toneCheck(story._id, story.paragraph);
       });
-    })
-  });
+    });
+  })
 }
 
 // the New York Times api returns ten articles per GET request, getFifty makes 5 successive requests
-exports.getFifty = function(startDate, endDate, count) {
+exports.getFifty = function(startDate, endDate, count, callback) {
   //the NYT public api has a call-limit of 5 per second,
-  console.log('count', count);
+  start = new Date(startDate).yyyymmdd();
+  end = new Date(endDate).yyyymmdd();
+  count = count ? count : 0;
+  console.log('count', count, 'start', start, 'end', end);
   for (var page = count; page < count + 5; page++) {
-    console.log('page', page);
-    exports.getArticles(startDate, endDate, page);
+    exports.getArticles(start, end, page);
   }
+  if (callback) callback();
 }
 
-
-
-
-
-
-
+// make Date format be NYT friendly
+Date.prototype.yyyymmdd = function() {
+  var mm = ("0" + (this.getMonth() + 1)).slice(-2);
+  var dd = (  "0" + this.getDate()).slice(-2);
+  return [this.getFullYear(), mm, dd].join('');
+}

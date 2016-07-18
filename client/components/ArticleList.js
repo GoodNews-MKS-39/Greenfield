@@ -1,3 +1,4 @@
+
 // this houses all the articles after a mood exists
 import React from 'react';
 import { fetchArticles, fetchDatedArticles } from '../dbModels/articles.js';
@@ -30,7 +31,7 @@ export default class ArticleList extends React.Component{
           <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
         </div> 
         { this.state.articles
-          .filter(article => article[this.props.mood] > 0.1)
+          .filter(article => article[this.props.mood] > 0.6)
           .map((article) => {
           let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : (<img src={ "./img/jad.jpg" } />);
           return (
