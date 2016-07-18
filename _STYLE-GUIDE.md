@@ -49,6 +49,7 @@ var person = {
 - Use one space before the opening bracket.
 - Put the closing bracket on a new line, without leading spaces.
 - Do not end a complex statement with a semicolon.
+- .then() and .catch() statements begin on the same level of indentation as the promise they follow.
 - Functions:
 ```javascript
 function toCelsius(fahrenheit) {
@@ -68,6 +69,16 @@ if (time < 20) {
 } else {
     greeting = "Good evening";
 }
+```
+- .then() and .catch():
+```javascript
+returnsPromise()
+.then(function(result) {
+  return result;
+})
+.catch(function(err) {
+  return err;
+});
 ```
 # Object Rules
 ## General rules for object definitions:
