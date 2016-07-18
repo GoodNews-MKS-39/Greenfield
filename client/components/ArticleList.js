@@ -30,9 +30,9 @@ export default class ArticleList extends React.Component{
           <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
         </div> 
         { this.state.articles
-          .filter(article => article[this.props.mood] > 0.3)
+          .filter(article => article[this.props.mood] > 0.1)
           .map((article) => {
-          let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : '';
+          let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : (<img src={ "./img/jad.jpg" } />);
           return (
             <div key={article._id} className="col-sm-6 col-md-4">
               <div className='single_article'>
