@@ -15,10 +15,6 @@ app.get('/app-bundle.js',
   })
 );
 
-app.get('/cool', function(request, response) {
-  response.send(cool());
-});
-
 app.get('/articles', function(req, res){
   Article.all().then(function(articles){
     res.status(200).send(articles);

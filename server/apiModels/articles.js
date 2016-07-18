@@ -2,14 +2,17 @@ var db = require('../db');
 
 var Article = module.exports;
 
+// grabs all articles from db
 Article.all = function () {
   return db.collection('articles').find({});
 };
 
+// grabs all article id's from db to make sure no duplicates
 Article.allIds = function () {
   return db.collection('articles').find({}, {id: 1});
 };
 
+// query db for articles by date
 Article.findByDate = function (startDate, endDate) {
   return db.collection('articles').find({ 
     pub_date: {
@@ -19,13 +22,14 @@ Article.findByDate = function (startDate, endDate) {
   });
 };
 
+// checks db to see which articles haven't been assigned tone scores
 Article.noTone = function () {
-  //console.log('getting stories without tones');
   return db.collection('articles').find({ 
     tones: null
   });
 };
 
+// add tone scores from Watson to database
 Article.addTone = function (_id, tones) {
   return db.collection('articles').update({ 
     "_id" : _id },
@@ -48,6 +52,7 @@ Article.addTone = function (_id, tones) {
   })
 };
 
+// adds articles to db
 Article.create = function (incomingArticles) {
   // Copy to avoid mutation
   var attrs = Object.assign({}, incomingArticles);
@@ -70,12 +75,11 @@ Article.create = function (incomingArticles) {
 
 };
 
+// removes articles that don't have a summary paragraph
 Article.cleanUp = function() {
-  console.log('cleaning up');
   return db.collection('articles').find({ 
     paragraph: /!--/
   }).then(function(obituaries){
-    console.log('obituaries', obituaries);
     obituaries.forEach(function(obituary){
       db.collection('articles').remove({ _id: obituary._id});
     });
@@ -84,7 +88,6 @@ Article.cleanUp = function() {
   return db.collection('articles').find({ 
     paragraph: null
   }).then(function(empties){
-    console.log('empties', empties);
     empties.forEach(function(empty){
       db.collection('articles').remove({ _id: empty._id});
     });
@@ -93,7 +96,6 @@ Article.cleanUp = function() {
   return db.collection('articles').find({ 
     paragraph: ''
   }).then(function(blanks){
-    console.log('blanks', blanks);
     blanks.forEach(function(blank){
       db.collection('articles').remove({ _id: blank._id});
     });

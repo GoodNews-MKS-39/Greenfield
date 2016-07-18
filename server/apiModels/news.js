@@ -1,6 +1,4 @@
-var fetch = require('isomorphic-fetch');
 var Article = require('./articles');
-var util = require('./lib/util.js');
 var apiKeys = require('./lib/apiKeys');
 var rp = require('request-promise');
 var watson = require('./watson');
@@ -18,12 +16,14 @@ exports.getArticles = function(startDate, endDate, byTen) {
       'page': byTen
     },
   })
+
   .then(function(response) {
     if (response.status >= 400) {
       throw new Error("Bad response from server");
     }
     return JSON.parse(response);
   })
+  // formatting NYT api response for db
   .then(function(stories) {
     var storyArray = stories.response.docs.map(function(story) {
     return {url: story.web_url, paragraph: story.lead_paragraph, multimedia: story.multimedia, headline: story.headline, keywords: story.keywords, pub_date: new Date(story.pub_date), id: story._id, word_count: Number(story.word_count), tones: null}
@@ -47,7 +47,6 @@ exports.getFifty = function(startDate, endDate, count, callback) {
   start = new Date(startDate).yyyymmdd();
   end = new Date(endDate).yyyymmdd();
   count = count ? count : 0;
-  console.log('count', count, 'start', start, 'end', end);
   for (var page = count; page < count + 5; page++) {
     exports.getArticles(start, end, page);
   }
