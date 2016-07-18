@@ -7,7 +7,7 @@ export default class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      // state variable to control what gets displayed. eg mood = null; (or cheerful)
+      // state variable to control what gets displayed. eg mood = null; (or joy)
       mood: null
     };
   }
