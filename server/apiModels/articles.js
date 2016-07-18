@@ -73,8 +73,18 @@ Article.create = function (incomingArticles) {
 Article.cleanUp = function() {
   console.log('cleaning up');
   return db.collection('articles').find({ 
+    paragraph: /!--/
+  }).then(function(obituaries){
+    console.log('obituaries', obituaries);
+    obituaries.forEach(function(obituary){
+      db.collection('articles').remove({ _id: obituary._id});
+    });
+  });
+
+  return db.collection('articles').find({ 
     paragraph: null
   }).then(function(empties){
+    console.log('empties', empties);
     empties.forEach(function(empty){
       db.collection('articles').remove({ _id: empty._id});
     });
@@ -83,16 +93,9 @@ Article.cleanUp = function() {
   return db.collection('articles').find({ 
     paragraph: ''
   }).then(function(blanks){
+    console.log('blanks', blanks);
     blanks.forEach(function(blank){
       db.collection('articles').remove({ _id: blank._id});
-    });
-  });
-
-  return db.collection('articles').find({ 
-    paragraph: /<!-- /
-  }).then(function(obituaries){
-    obituaries.forEach(function(obituary){
-      db.collection('articles').remove({ _id: obituary._id});
     });
   });
 
