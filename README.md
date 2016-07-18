@@ -30,20 +30,21 @@ Watson - http://www.ibm.com/watson/developercloud/tone-analyzer.html
 - Filter for other 4 emotions (display angry articles)
 
 # Details
-- Components:
+### Components:
 1. /client/components/App.js: Highest level component, controls mood state which triggers articles to be rendered in ArticleList.js.
 2. /client/components/ArticleList.js: Component that houses all articles to be displayed. Displays when state 'mood' != null.
 3. /client/components/Splash.js: Landing page. Displays when state 'mood' = null.
 4. /client/components/UserControls.js: Component for user interation. Client can select dates to be queried. 
 
-- apiModels:
+### apiModels:
 1. /server/apiModels/lib/news.js: Model dedicated to connecting with NYT.
 2. /server/apiModels/lib/watson.js: Model dedicated to communicating with Watson api.
 3. /server/apiModels/lib/articles.js: Model dedicated to communicating with MongoDB.
 4. /server/apiModels/articles.js: Houses methods to manipulate database.
 
-- Crontab: 
-Three script files in /server/crontab directory. Should be set to run at least once a day, currently being executed manually. /server/crontab/fetchDailyArticles.js: Grabs all articles for current day when run.
-1. /server/crontab/fetchWeeklyArtiles.js: Grabs all articles for current week when run (high potential to surpass api call limit).
-2. /server/crontab/fetchTones.js: Looks for articles in database that hasn't been run through Watson and makes that api call. 
+### Crontab: 
+- Three script files in /server/crontab directory. Should be set to run at least once a day, currently being executed manually. 
+1. /server/crontab/fetchDailyArticles.js: Grabs all articles for current day when run.
+2. /server/crontab/fetchWeeklyArtiles.js: Grabs all articles for current week when run (high potential to surpass api call limit).
+3. /server/crontab/fetchTones.js: Looks for articles in database that hasn't been run through Watson and makes that api call. 
 
