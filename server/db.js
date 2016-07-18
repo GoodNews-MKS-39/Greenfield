@@ -11,6 +11,7 @@ else {
 
 module.exports = db;
 
+// clears database
 db.deleteEverything = function () {
   return Promise.all([
     db.collection('articles').remove({})

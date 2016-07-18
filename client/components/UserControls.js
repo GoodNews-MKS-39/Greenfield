@@ -1,6 +1,6 @@
-// this component allows the user to control which articles are displayed
 import React from 'react';
 
+// this component allows the user to control which articles are displayed via date selection
 export default class UserControls extends React.Component{
   constructor(props) {
     super(props);

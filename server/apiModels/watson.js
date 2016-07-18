@@ -1,5 +1,3 @@
-//getting data from watson, need to format
-
 var watson = require('watson-developer-cloud');
 var apiKeys = require('./lib/apiKeys');
 var news = require('./news.js');
@@ -14,6 +12,7 @@ var  tone_analyzer = watson.tone_analyzer({
   version_date: '2016-05-19'
 });
 
+// call to watson that generates tone scores
 exports.toneCheck = function(_id, input) {
   tone_analyzer.tone({ text: input },
   function(err, tone) {

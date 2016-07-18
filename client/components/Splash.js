@@ -1,6 +1,6 @@
-// this is the 'landing page' component
 import React from 'react';
 
+// this is the 'landing page' component
 export default class Splash extends React.Component{
   constructor(props) {
     super(props);
