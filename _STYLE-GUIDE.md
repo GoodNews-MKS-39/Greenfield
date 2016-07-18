@@ -20,6 +20,7 @@ var values = ["Volvo", "Saab", "Fiat"];
 ```
 # Code Indentation
 - Always use 2 spaces for indentation of code blocks:
+
 # Functions:
 ```javascript
 function toCelsius(fahrenheit) {
@@ -27,8 +28,9 @@ function toCelsius(fahrenheit) {
 }
 ```
 - Do not use tabs (tabulators) for indentation. Different editors interpret tabs differently.
-#Statement Rules
-##General rules for simple statements:
+
+# Statement Rules
+## General rules for simple statements:
 - Always end a simple statement with a semicolon.
 - Examples:
 ```javascript
@@ -105,10 +107,7 @@ document.getElementById("demo").innerHTML =
 - CSS uses hyphens in property-names (font-size).
 - Hyphens can be mistaken as subtraction attempts. Hyphens are not allowed in JavaScript names.
 
-## Underscores:
-- Many programmers prefer to use underscores (date_of_birth), especially in databases.
-
-## camelCase:
+## Other:
 - camelCase is used by JavaScript itself, by jQuery, and other JavaScript libraries.
 - Do not start names with a $ sign. It will put you in conflict with many JavaScript library names.
 
