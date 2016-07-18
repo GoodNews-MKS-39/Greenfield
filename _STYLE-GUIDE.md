@@ -2,7 +2,7 @@
 -We use camelCase for identifier names (variables and functions).
 -All names start with a letter.
 -At the bottom of this file, you will find a wider discussion about naming rules.
-
+```javascript
 firstName = "John";
 lastName = "Doe";
 
@@ -10,24 +10,30 @@ price = 19.90;
 tax = 0.20;
 
 fullPrice = price + (price * tax);
+```
 #Spaces Around Operators
 -Always put spaces around operators ( = + - * / ), and after commas:
 
 -Examples:
+```javascript
 var x = y + z;
 var values = ["Volvo", "Saab", "Fiat"];
+```
 #Code Indentation
 -Always use 2 spaces for indentation of code blocks:
 #Functions:
+```javascript
 function toCelsius(fahrenheit) {
     return (5 / 9) * (fahrenheit - 32);
 }
+```
 -Do not use tabs (tabulators) for indentation. Different editors interpret tabs differently.
 #Statement Rules
 ##General rules for simple statements:
 
 -Always end a simple statement with a semicolon.
 -Examples:
+```javascript
 var values = ["Volvo", "Saab", "Fiat"];
 
 var person = {
@@ -36,6 +42,7 @@ var person = {
     age: 50,
     eyeColor: "blue"
 };
+```
 ##General rules for complex (compound) statements:
 
 -Put the opening bracket at the end of the first line.
@@ -43,21 +50,25 @@ var person = {
 -Put the closing bracket on a new line, without leading spaces.
 -Do not end a complex statement with a semicolon.
 -Functions:
+```javascript
 function toCelsius(fahrenheit) {
     return (5 / 9) * (fahrenheit - 32);
 }
-
+```
 -Loops:
+```javascript
 for (i = 0; i < 5; i++) {
     x += i;
 }
-
+```
 -Conditionals:
+```javascript
 if (time < 20) {
     greeting = "Good day";
 } else {
     greeting = "Good evening";
 }
+```
 #Object Rules
 ##General rules for object definitions:
 
@@ -68,12 +79,14 @@ if (time < 20) {
 -Place the closing bracket on a new line, without leading spaces.
 -Always end an object definition with a semicolon.
 -Example
+```javascript
 var person = {
     firstName: "John",
     lastName: "Doe",
     age: 50,
     eyeColor: "blue"
 };
+```
 -Short objects can be written compressed, on one line, using spaces only between properties, like this:
 
 var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
@@ -83,8 +96,10 @@ Line Length < 80
 -If a JavaScript statement does not fit on one line, the best place to break it, is after an operator or a comma.
 
 -Example
+```javascript
 document.getElementById("demo").innerHTML =
     "Hello Dolly.";
+```
 
 #Naming Conventions
 -Always use the same naming convention for all the code. For example:
@@ -113,9 +128,9 @@ document.getElementById("demo").innerHTML =
 
 ##Loading JavaScript in HTML
 -Use simple syntax for loading external scripts (the type attribute is not necessary):
-
+```html
 <script src="myscript.js"></script>
-
+```
 #File Extensions
 -HTML files should have a .html extension (not .htm).
 -CSS files should have a .css extension.
