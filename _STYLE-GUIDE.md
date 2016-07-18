@@ -1,3 +1,4 @@
+*This style guide is adapted from W3School's style guide.
 # Variable Names
 - We use camelCase for identifier names (variables and functions).
 - All names start with a letter.
