@@ -1,4 +1,4 @@
-#Variable Names
+# Variable Names
 - We use camelCase for identifier names (variables and functions).
 - All names start with a letter.
 - At the bottom of this file, you will find a wider discussion about naming rules.
@@ -11,16 +11,16 @@ tax = 0.20;
 
 fullPrice = price + (price * tax);
 ```
-#Spaces Around Operators
+# Spaces Around Operators
 - Always put spaces around operators ( = + - * / ), and after commas:
 - Examples:
 ```javascript
 var x = y + z;
 var values = ["Volvo", "Saab", "Fiat"];
 ```
-#Code Indentation
+# Code Indentation
 - Always use 2 spaces for indentation of code blocks:
-#Functions:
+# Functions:
 ```javascript
 function toCelsius(fahrenheit) {
     return (5 / 9) * (fahrenheit - 32);
@@ -41,7 +41,7 @@ var person = {
     eyeColor: "blue"
 };
 ```
-##General rules for complex (compound) statements:
+## General rules for complex (compound) statements:
 - Put the opening bracket at the end of the first line.
 - Use one space before the opening bracket.
 - Put the closing bracket on a new line, without leading spaces.
@@ -66,8 +66,8 @@ if (time < 20) {
     greeting = "Good evening";
 }
 ```
-#Object Rules
-##General rules for object definitions:
+# Object Rules
+## General rules for object definitions:
 - Place the opening bracket on the same line as the object name.
 - Use colon plus one space between each property and its value.
 - Use quotes around string values, not around numeric values.
@@ -95,25 +95,29 @@ Line Length < 80
 document.getElementById("demo").innerHTML =
     "Hello Dolly.";
 ```
-#Naming Conventions
+# Naming Conventions
 - Variable and function names written as camelCase
 - Global variables written in UPPERCASE
 - Constants (like PI) written in UPPERCASE
-##Hyphens in HTML and CSS:
+
+## Hyphens in HTML and CSS:
 - HTML5 attributes can start with data- (data-quantity, data-price).
 - CSS uses hyphens in property-names (font-size).
 - Hyphens can be mistaken as subtraction attempts. Hyphens are not allowed in JavaScript names.
-##Underscores:
+
+## Underscores:
 - Many programmers prefer to use underscores (date_of_birth), especially in databases.
-##camelCase:
+
+## camelCase:
 - camelCase is used by JavaScript itself, by jQuery, and other JavaScript libraries.
 - Do not start names with a $ sign. It will put you in conflict with many JavaScript library names.
-##Loading JavaScript in HTML
+
+## Loading JavaScript in HTML
 - Use simple syntax for loading external scripts (the type attribute is not necessary):
 ```html
 <script src="myscript.js"></script>
 ```
-#File Extensions
+# File Extensions
 - HTML files should have a .html extension (not .htm).
 - CSS files should have a .css extension.
 - JavaScript files should have a .js extension.
