@@ -1,13 +1,3 @@
-/*
- font options
-font-family: 'Merriweather', serif;
-font-family: 'Open Sans', sans-serif;
-
-blue 1: #335dff
-blue 2(dk) : #2f3893;
-gold: #fec41a;
-*/
-
 @font-face {
     font-family: DSWalbaumfraktur;
     src: url(img/DSWalbaumfraktur.ttf);
@@ -107,7 +97,7 @@ input {
   border: none;
 }
 
-.single_article img{
+.single_article img {
   width: 100%;
   height: 225px;
   object-fit: cover;

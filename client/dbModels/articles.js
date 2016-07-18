@@ -1,7 +1,6 @@
 // methods for getting filtered data from the DB
-import fetch from 'isomorphic-fetch'
-
-import { checkStatus } from '../../server/apiModels/lib/util.js'
+import fetch from 'isomorphic-fetch';
+import { checkStatus } from '../../server/apiModels/lib/util.js';
 
 export function fetchArticles() {
   /*grab all articles from db*/
@@ -18,5 +17,5 @@ export function fetchDatedArticles(startDate, endDate) {
     },
     body: JSON.stringify({ startDate: startDate, endDate: endDate })
   })
-  .then(checkStatus)
+  .then(checkStatus);
 }

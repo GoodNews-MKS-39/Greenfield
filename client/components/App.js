@@ -16,7 +16,7 @@ export default class App extends React.Component{
     if (this.state.mood === null) {
       return (<Splash _changeMood={this._changeMood.bind(this)} />);
     } else {
-      return (<ArticleList mood={this.state.mood}/>);
+      return (<ArticleList mood={this.state.mood} />);
     }
   }
 
