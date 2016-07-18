@@ -43,9 +43,7 @@ Watson - http://www.ibm.com/watson/developercloud/tone-analyzer.html
 /server/apiModels/articles.js: Houses methods to manipulate database.
 
 - Crontab: 
-Three script files in /server/crontab directory. Should be set to run at least once a day, currently being executed manually. 
-
-/server/crontab/fetchDailyArticles.js: Grabs all articles for current day when run.
+Three script files in /server/crontab directory. Should be set to run at least once a day, currently being executed manually. /server/crontab/fetchDailyArticles.js: Grabs all articles for current day when run.
 /server/crontab/fetchWeeklyArtiles.js: Grabs all articles for current week when run (high potential to surpass api call limit).
 /server/crontab/fetchTones.js: Looks for articles in database that hasn't been run through Watson and makes that api call. 
 
