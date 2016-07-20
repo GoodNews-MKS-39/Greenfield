@@ -65,7 +65,8 @@ export default class ArticleList extends React.Component {
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
-                    <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
+
+                    <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
 
                 </div>
