@@ -36,7 +36,12 @@ export default class ArticleList extends React.Component {
     array.filter(this.onlyUnique)
   }
   getSources() {
-    fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
+    fetchAllSources()
+    .then(source => source.forEach(source => {
+      if(source !== 'buzzfeed' && source !== 'redditrall') {
+        this.getArticles(source)
+      }
+    }))
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
