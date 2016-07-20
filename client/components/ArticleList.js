@@ -32,7 +32,7 @@ export default class ArticleList extends React.Component {
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
-      var audio = new Audio('hello_world.wav');
+      var audio = new Audio('textToSpeech.wav');
       audio.play();
     })
   }
