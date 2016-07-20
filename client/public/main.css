@@ -68,7 +68,7 @@ input {
     display: flex;              /* establish flex container */
     justify-content: center;    /* center items vertically, in this case */
     align-items: center;        /* center items horizontally, in this case */
-    height: 200px;
+    height: 150px;
     text-align: left;
     background-color: white;
     border-radius: 10px;
@@ -78,4 +78,10 @@ input {
     width: 80%;
     margin: 5px;
     text-align: center;
+}
+.readButton{
+  position:relative;
+  bottom:auto;
+  right:90%;
+  z-index: 10;
 }
