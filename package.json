@@ -28,6 +28,7 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "request-promise": "^3.0.0",
+    "sentiment": "^1.0.6",
     "watson-developer-cloud": "^1.12.2"
   },
   "bugs": {

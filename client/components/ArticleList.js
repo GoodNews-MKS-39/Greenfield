@@ -4,6 +4,7 @@ import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/article
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 
+var s = require('sentiment');
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -22,6 +23,13 @@ export default class ArticleList extends React.Component {
   }
   getArticles(source) {
     fetchAllArticles(source).then((x)=> {
+      x.articles = x.articles.map((article) => {
+        article.source = x.source;
+        var result = s(article.title);
+        article.sentimentScore = result.score;
+        article.sentimentComparative = result.comparative;
+        return article;
+      })
       this.setState({ articles: this.state.articles.concat(x.articles) })
     })
   }
@@ -61,6 +69,7 @@ export default class ArticleList extends React.Component {
         </div> 
         {this.state.articles
           .map((article) => {
+
             return (
               <div className="col-sm-6 col-md-4">
                 <div className='single_article'>
