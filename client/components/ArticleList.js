@@ -10,7 +10,8 @@ export default class ArticleList extends React.Component {
     super(props);
 
     this.state = {
-      articles: []
+      articles: [],
+      sources: []
     };
   }
   onlyUnique(value, index, self) { 
@@ -28,13 +29,26 @@ export default class ArticleList extends React.Component {
     array.filter(this.onlyUnique)
   }
   getSources() {
-    fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
+    fetchAllSources().then(source => {
+      this.setState({ sources: source })
+      source.forEach(source => this.getArticles(source.id))
+      console.log("sources: ", this.state.sources)
+    })
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
       var audio = new Audio('textToSpeech.wav');
       audio.play();
     })
+  }
+  // Check to see if article.source is in sources state. 
+  //   if true: return sourceImg url
+  //   if false: do nothing
+  grabSourceImage(article) {
+    this.state.sources.forEach((source) => {
+      if (article.source === source.name) {
+        return source.urlsToLogo.small;
+      }
   }
 
   render() {
@@ -53,6 +67,7 @@ export default class ArticleList extends React.Component {
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div className="article_p">
+                    <img src={this.grabSourceImage(article)}>
                     <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
                   <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
