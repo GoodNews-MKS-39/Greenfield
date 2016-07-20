@@ -35,7 +35,12 @@ export default class ArticleList extends React.Component {
     array.filter(this.onlyUnique)
   }
   getSources() {
-    fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
+    fetchAllSources()
+    .then(source => source.forEach(source => {
+      if(source !== 'buzzfeed' && source !== 'redditrall') {
+        this.getArticles(source)
+      }
+    }))
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
@@ -54,9 +59,8 @@ export default class ArticleList extends React.Component {
         </div> 
         {this.state.articles
           .map((article) => {
-
             return (
-              <div className="col-sm-6 col-md-4">
+              <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
                 <div className='single_article'>
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
