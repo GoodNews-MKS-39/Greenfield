@@ -1,7 +1,8 @@
 // this houses all the articles after a mood exists
 import React from 'react';
-import { fetchAllArticles, fetchAllSources } from '../dbModels/articles.js';
+import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/articles.js';
 import UserControls from './UserControls.js';
+import Watson from 'watson-developer-cloud'
 
 
 export default class ArticleList extends React.Component {
@@ -29,6 +30,12 @@ export default class ArticleList extends React.Component {
   getSources() {
     fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
   }
+  textToSpeech(words) {
+    fetchVoice(words).then(something => {
+      var audio = new Audio('textToSpeech.wav');
+      audio.play();
+    })
+  }
 
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
@@ -38,7 +45,7 @@ export default class ArticleList extends React.Component {
           <h1>Good News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div> 
-        { this.state.articles
+        {this.state.articles
           .map((article) => {
             return (
               <div className="col-sm-6 col-md-4">
@@ -48,6 +55,7 @@ export default class ArticleList extends React.Component {
                   <div className="article_p">
                     <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
+                  <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
                 </div>
               </div>
             )

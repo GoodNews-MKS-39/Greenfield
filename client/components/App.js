@@ -1,7 +1,6 @@
 import React from 'react';
 import Splash from './Splash.js';
 import ArticleList from './ArticleList.js';
-import * as ArticleFetcher from '../dbModels/articles'
 // this is the highest level component, toggles between rendering Splash & ArticleList
 export default class App extends React.Component{
   constructor(props) {
