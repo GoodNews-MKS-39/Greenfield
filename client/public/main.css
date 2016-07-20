@@ -102,7 +102,7 @@ input {
 }
 
 /* /////////// Source Image CSS \\\\\\\\\\\ */
-.source-image {
+img.source-image {
   width: 50px;
   height: auto;
 }
