@@ -13,3 +13,15 @@ export function fetchAllArticles(source) {
   return fetch(`https://newsapi.org/v1/articles/?source=${source}&apiKey=230b53e7dc294643b8a26493f04f49e0`, { method: 'GET' })
       .then(resp => resp.json());
 }
+
+export function fetchVoice(words) {
+	console.log('sending words to be read', words)
+	let obj = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({words: words})
+  }
+	return fetch('/textToSpeech', obj).then(resp => resp.json())
+}
