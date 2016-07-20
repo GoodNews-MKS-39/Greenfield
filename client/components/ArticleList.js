@@ -4,6 +4,7 @@ import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/article
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 import Sentiment from 'sentiment';
+import * as Logo from '../models/sourceLogo.js'
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -11,7 +12,6 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       articles: [],
-      sources: []
     };
   }
   onlyUnique(value, index, self) { 
@@ -21,7 +21,7 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
-    fetchAllArticles(source).then((x)=> {
+    fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
         var result = Sentiment(article.title);
@@ -30,6 +30,9 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
+      return x
+    })
+    .then((articles) => {
     })
   }
   removeDuplicates(array) {
@@ -37,9 +40,7 @@ export default class ArticleList extends React.Component {
   }
   getSources() {
     fetchAllSources().then(source => {
-      this.setState({ sources: source })
-      source.forEach(source => this.getArticles(source.id))
-      console.log("sources: ", this.state.sources)
+      source.forEach(source => this.getArticles(source))
     })
   }
   textToSpeech(words) {
@@ -51,14 +52,6 @@ export default class ArticleList extends React.Component {
   // Check to see if article.source is in sources state. 
   //   if true: return sourceImg url
   //   if false: do nothing
-  grabSourceImage(article) {
-    this.state.sources.forEach((source) => {
-      if (article.source === source.name) {
-        return source.urlsToLogo.small;
-      }
-    })
-  }
-
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
@@ -71,13 +64,13 @@ export default class ArticleList extends React.Component {
           .map((article) => {
             return (
               <div className="col-sm-6 col-md-4">
-              {console.log("article:", article)}
                 <div className='single_article'>
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div className="article_p">
-                    {/*<img src={this.grabSourceImage(article)}>*/}
-                    <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
+                    <img className="source-logo" src={Logo.findSourceLogo(article.source)} />
+                    <p> {article.description} <a href={article.url} target="_blank">(Read more)</a></p>
+                  }
                   </div>
                   <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
                 </div>
