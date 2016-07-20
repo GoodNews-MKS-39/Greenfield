@@ -53,20 +53,17 @@ export default class ArticleList extends React.Component {
     console.log("Articles front end: 48:", articles)
     // sorts articles by emotion score by what the current mood is.
     if(this.state.mood){
-      if(this.state.mood === 'good'){
-        articles.sort((a, b) => {
-          if(a.sentimentScore > b.sentimentScore) return -1;
-          else if(b.sentimentScore > a.sentimentScore) return 1;
-          else return 0;
-        })
-      } else if(this.state.mood === 'bad'){
-        articles.sort((a, b) => {
-          if(a.sentimentScore > b.sentimentScore) return 1;
-          else if(b.sentimentScore > a.sentimentScore) return -1;
-          else return 0;
-        })
-      }
+      var sortObject = {
+        'good': [-1, 1],
+        'bad': [1, -1]
+      };
+      articles.sort((a, b) => {
+        if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
+        else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
+        else return 0;
+      })
     }
+
     // Returning article elements to be displayed
     return articles.map((article) => {
       return (
