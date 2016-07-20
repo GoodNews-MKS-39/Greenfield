@@ -1,6 +1,6 @@
 // this houses all the articles after a mood exists
 import React from 'react';
-import { fetchAllArticles, fetchAllSources } from '../dbModels/articles.js';
+import { fetchAllArticles, fetchAllSources } from '../models/articles.js';
 import UserControls from './UserControls.js';
 
 

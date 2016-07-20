@@ -9,5 +9,4 @@ export default class UserControls extends React.Component {
       </div>
     )
   }
-
 }

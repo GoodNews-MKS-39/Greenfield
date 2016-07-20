@@ -15,23 +15,6 @@ app.get('/app-bundle.js',
   })
 );
 
-
-app.get('/articles', function(req, res) {
-  Article.all()
-  .then(function(articles) {
-    res.status(200).send(articles);
-  });
-});
-
-app.post('/datedArticles', function(req, res) {
-  console.log('req.body', req.body);
-  news.getFifty(req.body.startDate, req.body.endDate, 0, function() {
-    Article.findByDate(req.body.startDate, req.body.endDate).then(function(articles) {
-      res.status(200).send(articles);
-    });
-  }); 
-});
-
 var port = process.env.PORT || 4000;
 app.listen(port, function() {
   console.log("Listening on localhost:" + port);
