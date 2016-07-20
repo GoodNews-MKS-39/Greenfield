@@ -1,7 +1,9 @@
 // this houses all the articles after a mood exists
 import React from 'react';
 import { fetchAllArticles, fetchAllSources } from '../dbModels/articles.js';
+import { fetchComments, postComment } from '../dbModels/comments.js'
 import UserControls from './UserControls.js';
+import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 
 
 export default class ArticleList extends React.Component {
