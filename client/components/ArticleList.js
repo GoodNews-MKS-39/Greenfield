@@ -4,13 +4,14 @@ import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/article
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 import Sentiment from 'sentiment';
+import * as Logo from '../models/sourceLogo.js'
 
 export default class ArticleList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      articles: []
+      articles: [],
     };
   }
   onlyUnique(value, index, self) {
@@ -20,7 +21,7 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
-    fetchAllArticles(source).then((x)=> {
+    fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
         var result = Sentiment(article.title);
@@ -29,6 +30,9 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
+      return x
+    })
+    .then((articles) => {
     })
   }
   removeDuplicates(array) {
@@ -48,7 +52,9 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
-
+  // Check to see if article.source is in sources state. 
+  //   if true: return sourceImg url
+  //   if false: do nothing
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
@@ -65,7 +71,7 @@ export default class ArticleList extends React.Component {
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
-
+                    <img className="source-image" src={Logo.findSourceLogo(article.source)} />
                     <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
 
