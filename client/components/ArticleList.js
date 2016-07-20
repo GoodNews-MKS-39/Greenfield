@@ -3,7 +3,7 @@ import React from 'react';
 import { fetchAllArticles, fetchAllSources } from '../dbModels/articles.js';
 import { fetchComments, postComment } from '../dbModels/comments.js'
 import UserControls from './UserControls.js';
-import {ModalContainer, ModalDialog} from 'react-modal-dialog';
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
 
 export default class ArticleList extends React.Component {
@@ -11,6 +11,7 @@ export default class ArticleList extends React.Component {
     super(props);
 
     this.state = {
+      showComments: false,
       articles: []
     };
   }
@@ -23,13 +24,24 @@ export default class ArticleList extends React.Component {
   getArticles(source) {
     fetchAllArticles(source).then((x)=> {
       this.setState({ articles: this.state.articles.concat(x.articles) })
-    })
+    }) 
   }
   removeDuplicates(array) {
     array.filter(this.onlyUnique)
   }
   getSources() {
     fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
+  }
+  openComments(title) {
+    this.setState({articleTitle: title})
+    fetchComments(title)
+    .then(comments => {
+      this.setState({comments: comments})
+      this.setState({showComments: true});
+    })
+  }
+  closeComments() {
+    this.setState({showComments: false})
   }
 
   render() {
@@ -39,7 +51,10 @@ export default class ArticleList extends React.Component {
         <div className="article_header"> 
           <h1>Good News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
-        </div> 
+        </div>
+        {this.state.showComments ?
+          <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
+          : null} 
         { this.state.articles
           .map((article) => {
             return (
@@ -50,7 +65,7 @@ export default class ArticleList extends React.Component {
                   <div className="article_p">
                     <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
-                  <a href={'/comments/'+article.title}>Comments!</a>
+                  <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
                 </div>
               </div>
             )
@@ -60,3 +75,53 @@ export default class ArticleList extends React.Component {
     )
   }
 }
+
+class Comments extends React.Component {
+  constructor() {
+    super()
+  }
+  submitComment(){
+    let title = this.props.title;
+    let username = this.state.username;
+    let msg = this.state.msg;
+    postComment(title, username, msg)
+    .then(resp => {
+      console.log('yay we added a comment... resp: ', resp)
+    })
+  }
+
+  render() {
+
+    return (
+      <ModalContainer onClose={this.props.onClose}>
+        <ModalDialog onClose={this.props.onClose} className='comments'>
+          <h2>{this.props.title}</h2>
+          { this.props.comments
+            .map(comment => {
+              return (
+                <div className='single_comment'>
+                <p>{comment.username}</p>
+                <p>{comment.msg}</p>
+                </div>
+                )
+            })
+          }
+          <form name="newComment" onSubmit={e => {
+            e.preventDefault();
+            this.submitComment()
+          }}>
+            <p>Username:</p>
+            <input type='text' name="username" onChange={e => this.setState({username: e.target.value})}/>
+            <input type='text' name="msg" onChange={e => this.setState({msg: e.target.value})}/>
+            <button type='submit'>Submit</button>
+
+          </form>
+        </ModalDialog>
+      </ModalContainer>
+      )
+  }
+}
+
+
+
+

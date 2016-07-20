@@ -6,7 +6,7 @@ export function fetchComments(title) {
 	.then(resp => resp.json())
 }
 
-export function postComment(title, username, msg) {
+export function postComment(username, msg) {
 	return fetch('/comments/:title', {
 		method: 'POST',
 		headers: {
