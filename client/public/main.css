@@ -1,23 +1,4 @@
 
-.badNews {
-  margin-top: 15px;
-  background-color: white;
-  color: black;
-  padding: 5px;
-  border-radius: 5px;
-
-}
-
-.news_div-splashpage {
-  background-color: rgba(255,255,255,.75);
-  width: 50%;
-  margin: 80px auto;
-  padding: 30px 20px;
-  border-radius: 10px;
-}
-
-
-
 /* ///////// ARTICLES //////// */
 body {
   text-align: center;
