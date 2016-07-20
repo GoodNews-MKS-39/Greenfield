@@ -48,6 +48,7 @@ export default class ArticleList extends React.Component {
                   <div className="article_p">
                     <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
+                  <a href={'/comments/'+article.title}>Comments!</a>
                 </div>
               </div>
             )

@@ -25,7 +25,7 @@
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.9.2",
-    "promised-mongo": "^1.2.0",
+    "promised-mongo": "github:makersquare/promised-mongo",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "request-promise": "^3.0.0",
