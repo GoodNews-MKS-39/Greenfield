@@ -13,10 +13,11 @@ export default class Splash extends React.Component {
         <h1>Good News</h1>
         <div>
           <h3>{now.toDateString()}</h3>
-          <button className='moodSetter' onClick={this.props._changeMood}>It's great to be alive!</button>
+          <button className='goodNews' onClick={this.props._changeMood}>Good News</button>
+          <button className='badNews' onClick={this.props._changeMood}>Bad News</button>
         </div>
       </div>
     </div>);
   }
-  
+
 }
