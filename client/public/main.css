@@ -100,9 +100,3 @@ input {
     margin: 5px;
     text-align: center;
 }
-.readButton{
-  position:relative;
-  bottom:auto;
-  right:90%;
-  z-index: 10;
-}
