@@ -70,11 +70,8 @@ export default class ArticleList extends React.Component {
                 <div className='single_article'>
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
-                  <div className="article_p">
-                    <img className="source-logo" src={Logo.findSourceLogo(article.source)} />
-                    <p> {article.description} <a href={article.url} target="_blank">(Read more)</a></p>
                   <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
-
+                    <img className="source-image" src={Logo.findSourceLogo(article.source)} />
                     <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
 
