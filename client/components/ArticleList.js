@@ -14,7 +14,7 @@ export default class ArticleList extends React.Component {
       articles: [],
     };
   }
-  onlyUnique(value, index, self) { 
+  onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   componentWillMount() {
@@ -39,9 +39,12 @@ export default class ArticleList extends React.Component {
     array.filter(this.onlyUnique)
   }
   getSources() {
-    fetchAllSources().then(source => {
-      source.forEach(source => this.getArticles(source))
-    })
+    fetchAllSources()
+    .then(source => source.forEach(source => {
+      if(source !== 'buzzfeed' && source !== 'redditrall') {
+        this.getArticles(source)
+      }
+    }))
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
@@ -56,23 +59,25 @@ export default class ArticleList extends React.Component {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className='daily_articles'>
-        <div className="article_header"> 
-          <h1>Good News</h1>
+        <div className="article_header">
+          <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
-        </div> 
+        </div>
         {this.state.articles
           .map((article) => {
             return (
-              <div className="col-sm-6 col-md-4">
+              <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
                 <div className='single_article'>
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div className="article_p">
                     <img className="source-logo" src={Logo.findSourceLogo(article.source)} />
                     <p> {article.description} <a href={article.url} target="_blank">(Read more)</a></p>
-                  }
+                  <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
+
+                    <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
-                  <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
+
                 </div>
               </div>
             )
