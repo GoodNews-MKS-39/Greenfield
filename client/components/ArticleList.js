@@ -56,6 +56,7 @@ export default class ArticleList extends React.Component {
       if (article.source === source.name) {
         return source.urlsToLogo.small;
       }
+    })
   }
 
   render() {
@@ -68,14 +69,14 @@ export default class ArticleList extends React.Component {
         </div> 
         {this.state.articles
           .map((article) => {
-
             return (
               <div className="col-sm-6 col-md-4">
+              {console.log("article:", article)}
                 <div className='single_article'>
                   <img src={article.urlToImage} />
                   <h3> { article.title } - { article.publishedAt }</h3>
                   <div className="article_p">
-                    <img src={this.grabSourceImage(article)}>
+                    {/*<img src={this.grabSourceImage(article)}>*/}
                     <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
                   <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
