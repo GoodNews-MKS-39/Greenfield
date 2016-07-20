@@ -3,8 +3,7 @@ import React from 'react';
 import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/articles.js';
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
-
-var s = require('sentiment');
+import Sentiment from 'sentiment';
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ export default class ArticleList extends React.Component {
     fetchAllArticles(source).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
-        var result = s(article.title);
+        var result = Sentiment(article.title);
         article.sentimentScore = result.score;
         article.sentimentComparative = result.comparative;
         return article;
