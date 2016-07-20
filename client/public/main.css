@@ -20,7 +20,15 @@ h3 {
 h1 {
   font-family: DSWalbaumfraktur;
   font-size: 8em;
-  color: #fec41a;
+  color: white;
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 }
 
 p {
@@ -50,9 +58,7 @@ input {
   justify-content: center;
 }
 
-.single_article:hover {
-   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-}
+
 
 .single_article h3 {
   font-size: 1.4em;
@@ -72,6 +78,10 @@ input {
     text-align: left;
     background-color: white;
     border-radius: 10px;
+}
+.article_p:hover {
+   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+   opacity:0.5;
 }
 
 .article_p p {

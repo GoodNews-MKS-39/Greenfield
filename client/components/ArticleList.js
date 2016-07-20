@@ -54,7 +54,7 @@ export default class ArticleList extends React.Component {
     return (
       <div className='daily_articles'>
         <div className="article_header">
-          <h1>Good News</h1>
+          <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div>
         {this.state.articles
