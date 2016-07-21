@@ -24,18 +24,34 @@ export default class ArticleList extends React.Component {
   componentWillMount() {
     this.getSources()
   }
-  getArticles(source) {
-    fetchAllArticles(source.id).then((x)=> {
-      x.articles = x.articles.map((article) => {
-        article.source = x.source;
-        var result = Sentiment(article.title);
-        article.sentimentScore = result.score;
-        article.sentimentComparative = result.comparative;
-        return article;
+  getArticles(sources) {
+    var i = 0;
+    var articles = [];
+    getFetchCall.call(this);  
+
+    function getFetchCall() {
+      fetchAllArticles(sources[i].id)
+      .then((result) => {
+        console.log("Result:", i, result)
+        result.articles = result.articles
+        .map((article) => {
+          article.source = sources[i];
+          var result = Sentiment(article.title);
+          article.sentimentScore = result.score;
+          article.sentimentComparative = result.comparative;
+          return article;
+        })
+        articles = articles.concat(result.articles);
+        
+        if(i < sources.length - 1){
+          i++;
+          getFetchCall.call(this, sources[i])
+        } else {
+          articles = this.removeDuplicates(articles);
+          this.setState({ articles: articles })
+        }
       })
-      x.articles = this.removeDuplicates(x.articles);
-      this.setState({ articles: this.state.articles.concat(x.articles) })
-    }) 
+    }
   }
   removeDuplicates(array) {
     var uniqueArticles = [];
@@ -52,12 +68,16 @@ export default class ArticleList extends React.Component {
   }
   getSources() {
     fetchAllSources()
-    .then(source => source.forEach(source => {
-      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
-      if(sourcesToFilter.indexOf(source.id) === -1) {
-        this.getArticles(source)
-      }
-    }))
+    .then(source => {
+      let sources = [];
+      source.forEach(source => {
+        let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
+        if(sourcesToFilter.indexOf(source.id) === -1) {
+          sources.push(source);
+        }
+      })
+      this.getArticles(sources)
+    })
   }
   openComments(title) {
     console.log('opening comments')
