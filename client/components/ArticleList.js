@@ -14,8 +14,8 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       articles: [],
-      mood: 'good'
-      showComments: false,
+      mood: 'good',
+      showComments: false
     };
   }
   onlyUnique(value, index, self) {
@@ -66,7 +66,6 @@ export default class ArticleList extends React.Component {
   }
 
   renderArticles(articles) {
-    console.log("Articles front end: 48:", articles)
     // sorts articles by emotion score by what the current mood is.
     if(this.state.mood){
       var sortObject = {

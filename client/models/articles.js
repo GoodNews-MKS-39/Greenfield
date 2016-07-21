@@ -1,6 +1,5 @@
 // methods for getting filtered data from the DB
 import fetch from 'isomorphic-fetch';
-import { checkStatus } from '../../server/apiModels/lib/util.js';
 
 export function fetchAllSources() {
   /*grab articles from db that are within a given date range*/
