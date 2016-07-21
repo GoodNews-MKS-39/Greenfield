@@ -5,7 +5,7 @@ import { checkStatus } from '../../server/apiModels/lib/util.js';
 export function fetchAllSources() {
   /*grab articles from db that are within a given date range*/
   return fetch('https://newsapi.org/v1/sources')
-    .then(resp => resp.json().then(x => x.sources.map(source => source.id)))
+    .then(resp => resp.json().then(x => x.sources.map(source => source)))
 }
 
 export function fetchAllArticles(source) {

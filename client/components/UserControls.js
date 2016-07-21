@@ -5,7 +5,8 @@ export default class UserControls extends React.Component {
   render() {
     return (
       <div className='user-controls'>
-        <button onClick={this.props.getArticles}> Search </button>
+        <button className='goodNews' onClick={this.props.getArticles}>Good News</button>
+        <button className='badNews' onClick={this.props.getArticles}>Bad News</button>
       </div>
     )
   }

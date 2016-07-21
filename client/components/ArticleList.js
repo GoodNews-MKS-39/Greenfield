@@ -4,6 +4,7 @@ import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/article
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 import Sentiment from 'sentiment';
+import * as Logo from '../models/sourceLogo.js'
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -14,14 +15,14 @@ export default class ArticleList extends React.Component {
       mood: 'good'
     };
   }
-  onlyUnique(value, index, self) { 
+  onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
   componentWillMount() {
     this.getSources()
   }
   getArticles(source) {
-    fetchAllArticles(source).then((x)=> {
+    fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
         var result = Sentiment(article.title);
@@ -30,6 +31,9 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
+      return x
+    })
+    .then((articles) => {
     })
   }
   removeDuplicates(array) {
@@ -49,6 +53,7 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
+
   renderArticles(articles) {
     console.log("Articles front end: 48:", articles)
     // sorts articles by emotion score by what the current mood is.
@@ -67,14 +72,14 @@ export default class ArticleList extends React.Component {
     // Returning article elements to be displayed
     return articles.map((article) => {
       return (
-        <div className="col-sm-6 col-md-4">
+        <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
           <div className='single_article'>
             <img src={article.urlToImage} />
             <h3> { article.title } - { article.publishedAt }</h3>
-            <div className="article_p">
-              <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
+            <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
+              <img className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
             </div>
-            <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
           </div>
         </div>
       )
@@ -85,8 +90,8 @@ export default class ArticleList extends React.Component {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className='daily_articles'>
-        <div className="article_header"> 
-          <h1>Good News</h1>
+        <div className="article_header">
+          <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div> 
         {this.renderArticles(this.state.articles)}
