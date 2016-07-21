@@ -95,7 +95,7 @@ p {
 }
 
 .comment-box {
-  width: 50%;
+  width: 75%;
   height: 125px;
 }
 /* /////////// Source Image CSS \\\\\\\\\\\ */
@@ -104,3 +104,41 @@ img.source-image {
   height: auto;
   background-color: white;
 }
+
+.comment-username {
+  display: inline;
+  font-weight: bold;
+}
+
+.comments h2 {
+  color: grey;
+}
+
+.comments h3 {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+}
+
+.comment-msgs {
+  max-width:500px;
+  max-height:300px;
+  overflow-y: auto;
+}
+
+.new-comment {
+  width: 60%;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid black;
+}
+
+.new-comment:focus {
+  outline: none;
+  border: 3px solid #555;
+}
+
+.new-comment input {
+  margin-bottom: 15px;
+}
+
