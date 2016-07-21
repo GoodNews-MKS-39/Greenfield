@@ -4,7 +4,7 @@ import React from 'react';
 export default class UserControls extends React.Component {
   handleButtonClick(mood) {
   	this.props.getArticles;
-  	this.props.changeMood
+  	this.props.changeMood.call(this, mood)
   }
 
   render() {

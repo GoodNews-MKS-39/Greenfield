@@ -66,7 +66,7 @@ export default class ArticleList extends React.Component {
     })
   }
   changeMood(mood) {
-
+    this.setState({mood: mood})
   }
 
   renderArticles(articles) {
