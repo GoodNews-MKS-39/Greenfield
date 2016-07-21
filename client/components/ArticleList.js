@@ -106,8 +106,9 @@ export default class ArticleList extends React.Component {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className="pure-g">
-        <div className="splash-container article_header">
+        <div className="splash-container">
           <h1 className="splash-head">Have You Heard The News</h1>
+          <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
         </div> 
         {this.state.showComments ? 
