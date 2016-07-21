@@ -103,11 +103,36 @@ img.source-image {
   height: auto;
   border-radius: 10%;
   background-color: white;
-  opacity: 0.5;
+  opacity: 0.7;
 }
-img.source-image:hover{
+img.source-image:hover {
   -moz-box-shadow: 0 0 10px #ccc;
   -webkit-box-shadow: 0 0 10px #ccc;
   box-shadow: 0 0 10px #ccc;
-  background: url(./img/sound-recording.png) no-repeat; 
+  background: url(./img/sound-recording.png) ;
+}
+.profile-img-container {
+    position: absolute;
+    width:50%;
+}
+
+.profile-img-container img:hover {
+    opacity: 0.5;
+    z-index: 501;
+}
+
+.profile-img-container img:hover + i {
+    display: block;
+    z-index: 500;
+}
+
+.profile-img-container i {
+    display: none;
+    position: absolute;
+    margin-left:43%;
+    margin-top:40%;
+}
+
+.profile-img-container img {
+    position:absolute;
 }
