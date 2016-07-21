@@ -27,26 +27,34 @@ export default class ArticleList extends React.Component {
   getArticles(sources) {
     var i = 0;
     var articles = [];
+    // Start recursion
     getFetchCall.call(this);  
 
     function getFetchCall() {
+      // fetch articles on the current source
       fetchAllArticles(sources[i].id)
       .then((result) => {
-        console.log("Result:", i, result)
+        // Get result back from fetch call and map through articles
         result.articles = result.articles
         .map((article) => {
+          // Add source to each article object
           article.source = sources[i];
+          // Get and set Sentiment scores for current article
           var result = Sentiment(article.title);
           article.sentimentScore = result.score;
           article.sentimentComparative = result.comparative;
+          // return current article for map function
           return article;
         })
+        // Concat the modified articles onto the articles array
         articles = articles.concat(result.articles);
-        
+        // Check to see if there are any more sources to fetch
         if(i < sources.length - 1){
           i++;
+          // Start recursion again
           getFetchCall.call(this, sources[i])
         } else {
+          // No more sources, remove duplicates and set the articles state
           articles = this.removeDuplicates(articles);
           this.setState({ articles: articles })
         }
