@@ -107,7 +107,7 @@ export default class ArticleList extends React.Component {
     return (
       <div className="pure-g">
         <div className="splash-container article_header">
-          <h1>Good News or Bad News</h1>
+          <h1 className="splash-head">Have You Heard The News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
         </div> 
         {this.state.showComments ? 
