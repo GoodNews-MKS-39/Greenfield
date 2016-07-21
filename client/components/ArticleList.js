@@ -92,7 +92,7 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              <img onClick={this.textToSpeech.bind(null, article.description)} className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <img onClick={this.textToSpeech.bind(null, article.description)} className="source-image" src={Logo.findSourceLogo(article.source)}/>
               <p> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
               <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
             </aside>
