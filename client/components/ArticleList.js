@@ -26,6 +26,7 @@ export default class ArticleList extends React.Component {
   }
   getArticles(source) {
     fetchAllArticles(source.id).then((x)=> {
+      console.log("X:", x)
       x.articles = x.articles.map((article) => {
         article.source = x.source;
         var result = Sentiment(article.title);
@@ -33,11 +34,20 @@ export default class ArticleList extends React.Component {
         article.sentimentComparative = result.comparative;
         return article;
       })
+      x.articles = this.removeDuplicates(x.articles);
       this.setState({ articles: this.state.articles.concat(x.articles) })
     }) 
   }
   removeDuplicates(array) {
-    array.filter(this.onlyUnique)
+    var uniqueArticles = [];
+    var uniqueTitles = [];
+    array.forEach(article => {
+      if(uniqueTitles.indexOf(article.title) === -1){
+        uniqueTitles.push(article.title);
+        uniqueArticles.push(article);
+      }
+    })
+    return uniqueArticles;
   }
   getSources() {
     fetchAllSources()
