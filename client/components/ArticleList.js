@@ -41,7 +41,7 @@ export default class ArticleList extends React.Component {
   getSources() {
     fetchAllSources()
     .then(source => source.forEach(source => {
-      if(source !== 'buzzfeed' && source !== 'redditrall') {
+      if(source.id !== 'buzzfeed' && source.id !== 'redditrall') {
         this.getArticles(source)
       }
     }))
@@ -58,7 +58,7 @@ export default class ArticleList extends React.Component {
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
-      <div className='daily_articles'>
+      <div className="pure-g">
         <div className="article_header">
           <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
@@ -66,14 +66,13 @@ export default class ArticleList extends React.Component {
         {this.state.articles
           .map((article) => {
             return (
-              <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
-                <div className='single_article'>
-                  <img src={article.urlToImage} />
-                  <h3> { article.title } - { article.publishedAt }</h3>
-                  <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
+              <div key={this.state.articles.indexOf(article)} className="photo-box u-1 u-med-1-3 u-lrg-1-4">
+                <div>
+                  <img className="article" src={article.urlToImage} />
+                  <aside className="photo-box-caption">
                     <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-                    <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
-                  </div>
+                    <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
+                  </aside>
 
                 </div>
               </div>
@@ -84,3 +83,7 @@ export default class ArticleList extends React.Component {
     )
   }
 }
+
+<aside class="photo-box-caption">
+                <span>by <a href="http://www.dillonmcintosh.tumblr.com/">Dillon McIntosh</a></span>
+            </aside>
