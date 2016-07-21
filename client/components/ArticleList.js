@@ -24,18 +24,42 @@ export default class ArticleList extends React.Component {
   componentWillMount() {
     this.getSources()
   }
-  getArticles(source) {
-    fetchAllArticles(source.id).then((x)=> {
-      x.articles = x.articles.map((article) => {
-        article.source = x.source;
-        var result = Sentiment(article.title);
-        article.sentimentScore = result.score;
-        article.sentimentComparative = result.comparative;
-        return article;
+  getArticles(sources) {
+    var i = 0;
+    var articles = [];
+    // Start recursion
+    getFetchCall.call(this);  
+
+    function getFetchCall() {
+      // fetch articles on the current source
+      fetchAllArticles(sources[i].id)
+      .then((result) => {
+        // Get result back from fetch call and map through articles
+        result.articles = result.articles
+        .map((article) => {
+          // Add source to each article object
+          article.source = sources[i];
+          // Get and set Sentiment scores for current article
+          var result = Sentiment(article.title);
+          article.sentimentScore = result.score;
+          article.sentimentComparative = result.comparative;
+          // return current article for map function
+          return article;
+        })
+        // Concat the modified articles onto the articles array
+        articles = articles.concat(result.articles);
+        // Check to see if there are any more sources to fetch
+        if(i < sources.length - 1){
+          i++;
+          // Start recursion again
+          getFetchCall.call(this, sources[i])
+        } else {
+          // No more sources, remove duplicates and set the articles state
+          articles = this.removeDuplicates(articles);
+          this.setState({ articles: articles })
+        }
       })
-      x.articles = this.removeDuplicates(x.articles);
-      this.setState({ articles: this.state.articles.concat(x.articles) })
-    }) 
+    }
   }
   removeDuplicates(array) {
     var uniqueArticles = [];
@@ -52,12 +76,16 @@ export default class ArticleList extends React.Component {
   }
   getSources() {
     fetchAllSources()
-    .then(source => source.forEach(source => {
-      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
-      if(sourcesToFilter.indexOf(source.id) === -1) {
-        this.getArticles(source)
-      }
-    }))
+    .then(source => {
+      let sources = [];
+      source.forEach(source => {
+        let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
+        if(sourcesToFilter.indexOf(source.id) === -1) {
+          sources.push(source);
+        }
+      })
+      this.getArticles(sources)
+    })
   }
   openComments(title) {
     console.log('opening comments')
