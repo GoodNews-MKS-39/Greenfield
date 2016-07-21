@@ -5,6 +5,8 @@ var bodyParser  = require('body-parser');
 var watson      = require('watson-developer-cloud');
 var fs 		    = require('fs');
 var credentials = require('./watsonCredentials')
+var Article = require('./apiModels/articles');
+var Comments = require('./apiModels/comments')
 
 var app = express();
 
@@ -16,6 +18,41 @@ app.get('/app-bundle.js',
     transform: [ [ require('babelify'), { presets: ["es2015", "react"] } ] ]
   })
 );
+
+//endpoint for article comments
+app.get('/comments/:title', function(req, res) {
+  //grab title from params (url)
+  let title = req.params.title;
+  //talk to Comments apiModel
+  //search for comment by title
+
+  Comments.findByTitle(title)
+  .then(function(comments){
+    console.log('comments ', comments)
+    res.send(comments)
+  })
+  .catch(function(error){
+    console.log('error ' , error);
+  })
+})
+
+app.post('/comments', function(req, res) {
+  //grab title, username and msg from body send by client
+  let title = req.body.title;
+  let username = req.body.username;
+  let msg = req.body.msg;
+
+  //talk to Comments apiModel
+  //insert new comment into comments DB through api model
+  Comments.newComment(title, username, msg)
+  .then(function(comment){
+    res.status(200).send(comment)
+  })
+  .catch(function(err){
+    console.log('err: ', err)
+  })
+
+})
 
 app.post('/textToSpeech', function(req, res) {
 	var text_to_speech = watson.text_to_speech({
