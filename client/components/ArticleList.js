@@ -110,9 +110,9 @@ class Comments extends React.Component {
             e.preventDefault();
             this.submitComment()
           }}>
-            <p>Username:</p>
-            <input type='text' name="username" onChange={e => this.setState({username: e.target.value})}/>
-            <input type='text' name="msg" onChange={e => this.setState({msg: e.target.value})}/>
+
+          <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
+          <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
             <button type='submit'>Submit</button>
 
           </form>

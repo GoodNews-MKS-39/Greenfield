@@ -41,10 +41,9 @@ app.get('/comments/:title', function(req, res) {
   })
 })
 
-app.post('/comments/:title', function(req, res) {
-  //grab title from params (url)
-  let title = req.params.title;
-  //grab username and msg from body send by client
+app.post('/comments', function(req, res) {
+  //grab title, username and msg from body send by client
+  let title = req.body.title;
   let username = req.body.username;
   let msg = req.body.msg;
 
