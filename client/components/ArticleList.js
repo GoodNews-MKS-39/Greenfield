@@ -177,17 +177,9 @@ class Comments extends React.Component {
             e.preventDefault();
             this.submitComment();
           }}>
-
-<<<<<<< HEAD
-          <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
-          <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
-            <button className="pure-button pure-button-primary" type='submit'>Submit</button>
-=======
           <div> <input className='new-comment' type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})} value={this.state.username}/> </div>
           <div> <textarea className='new-comment' form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})} value={this.state.msg}/> </div>
             <button type='submit'>Submit</button>
->>>>>>> issue8
-
           </form>
         </ModalDialog>
       </ModalContainer>
