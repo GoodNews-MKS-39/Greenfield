@@ -25,6 +25,7 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
+    console.log("testing")
     fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
@@ -66,6 +67,9 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
+  changeMood(mood) {
+    this.setState({mood: mood})
+  }
 
   renderArticles(articles) {
     // sorts articles by emotion score by what the current mood is.
@@ -104,7 +108,7 @@ export default class ArticleList extends React.Component {
       <div className="pure-g">
         <div className="splash-container article_header">
           <h1>Good News or Bad News</h1>
-          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
+          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
