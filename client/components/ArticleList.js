@@ -35,7 +35,7 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
-    }) 
+    })
   }
   removeDuplicates(array) {
     array.filter(this.onlyUnique)
@@ -92,8 +92,8 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
+              <img onClick={this.textToSpeech.bind(null, article.description)} className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <p> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
               <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
             </aside>
           </div>
@@ -109,8 +109,8 @@ export default class ArticleList extends React.Component {
         <div className="splash-container article_header">
           <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
-        </div> 
-        {this.state.showComments ? 
+        </div>
+        {this.state.showComments ?
           <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
