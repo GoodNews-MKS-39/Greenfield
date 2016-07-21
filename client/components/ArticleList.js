@@ -25,7 +25,6 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
-    console.log("testing")
     fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
@@ -43,7 +42,8 @@ export default class ArticleList extends React.Component {
   getSources() {
     fetchAllSources()
     .then(source => source.forEach(source => {
-      if(source.id !== 'buzzfeed' && source.id !== 'redditrall') {
+      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde']
+      if(sourcesToFilter.indexOf(source.id) === -1) {
         this.getArticles(source)
       }
     }))
