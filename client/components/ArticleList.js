@@ -13,8 +13,9 @@ export default class ArticleList extends React.Component {
     super(props);
 
     this.state = {
+      articles: [],
+      mood: 'good'
       showComments: false,
-      articles: []
     };
   }
   onlyUnique(value, index, self) {
@@ -63,9 +64,40 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
-  // Check to see if article.source is in sources state. 
-  //   if true: return sourceImg url
-  //   if false: do nothing
+
+  renderArticles(articles) {
+    console.log("Articles front end: 48:", articles)
+    // sorts articles by emotion score by what the current mood is.
+    if(this.state.mood){
+      var sortObject = {
+        'good': [-1, 1],
+        'bad': [1, -1]
+      };
+      articles.sort((a, b) => {
+        if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
+        else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
+        else return 0;
+      })
+    }
+
+    // Returning article elements to be displayed
+    return articles.map((article) => {
+      return (
+        <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
+          <div className='single_article'>
+            <img src={article.urlToImage} />
+            <h3> { article.title } - { article.publishedAt }</h3>
+            <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
+              <img className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
+            </div>
+            <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
+          </div>
+        </div>
+      )
+    })
+  }
+
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
@@ -73,28 +105,8 @@ export default class ArticleList extends React.Component {
         <div className="article_header">
           <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
-        </div>
-
-        {this.state.showComments ?
-          <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
-          : null} 
-        { this.state.articles
-          .map((article) => {
-            return (
-              <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
-                <div className='single_article'>
-                  <img src={article.urlToImage} />
-                  <h3> { article.title } - { article.publishedAt }</h3>
-                  <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
-                    <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-                    <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
-                  </div>
-                  <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
-                </div>
-              </div>
-            )
-          })
-        }
+        </div> 
+        {this.renderArticles(this.state.articles)}
       </div>
     )
   }
