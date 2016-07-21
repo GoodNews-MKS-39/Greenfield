@@ -1,5 +1,7 @@
 // this houses all the articles after a mood exists
 import React from 'react';
+import { fetchComments, postComment } from '../dbModels/comments.js'
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/articles.js';
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
@@ -12,6 +14,8 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       articles: [],
+      mood: 'good',
+      showComments: false
     };
   }
   onlyUnique(value, index, self) {
@@ -30,10 +34,7 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
-      return x
-    })
-    .then((articles) => {
-    })
+    }) 
   }
   removeDuplicates(array) {
     array.filter(this.onlyUnique)
@@ -46,15 +47,56 @@ export default class ArticleList extends React.Component {
       }
     }))
   }
+  openComments(title) {
+    this.setState({articleTitle: title})
+    fetchComments(title)
+    .then(comments => {
+      this.setState({comments: comments})
+      this.setState({showComments: true});
+    })
+  }
+  closeComments() {
+    this.setState({showComments: false})
+  }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
       var audio = new Audio('textToSpeech.wav');
       audio.play();
     })
   }
-  // Check to see if article.source is in sources state. 
-  //   if true: return sourceImg url
-  //   if false: do nothing
+
+  renderArticles(articles) {
+    // sorts articles by emotion score by what the current mood is.
+    if(this.state.mood){
+      var sortObject = {
+        'good': [-1, 1],
+        'bad': [1, -1]
+      };
+      articles.sort((a, b) => {
+        if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
+        else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
+        else return 0;
+      })
+    }
+
+    // Returning article elements to be displayed
+    return articles.map((article) => {
+      return (
+        <div key={this.state.articles.indexOf(article)} className="col-sm-6 col-md-4">
+          <div className='single_article'>
+            <img src={article.urlToImage} />
+            <h3> { article.title } - { article.publishedAt }</h3>
+            <div onClick={this.textToSpeech.bind(null, article.description)} className="article_p">
+              <img className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
+            </div>
+            <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
+          </div>
+        </div>
+      )
+    })
+  }
+
   render() {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
@@ -80,8 +122,55 @@ export default class ArticleList extends React.Component {
             )
           })
         }
-        </div>
+        </div> 
+        {this.renderArticles(this.state.articles)}
       </div>
     )
+  }
+}
+
+class Comments extends React.Component {
+  constructor() {
+    super()
+  }
+  submitComment(){
+    let title = this.props.title;
+    let username = this.state.username;
+    let msg = this.state.msg;
+    postComment(title, username, msg)
+    .then(resp => {
+      console.log('yay we added a comment... resp: ', resp)
+    })
+  }
+
+  render() {
+
+    return (
+      <ModalContainer onClose={this.props.onClose}>
+        <ModalDialog onClose={this.props.onClose} className='comments'>
+          <h2>{this.props.title}</h2>
+          { this.props.comments
+            .map(comment => {
+              return (
+                <div className='single_comment'>
+                <p>{comment.username}</p>
+                <p>{comment.msg}</p>
+                </div>
+                )
+            })
+          }
+          <form name="newComment" onSubmit={e => {
+            e.preventDefault();
+            this.submitComment()
+          }}>
+
+          <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
+          <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
+            <button type='submit'>Submit</button>
+
+          </form>
+        </ModalDialog>
+      </ModalContainer>
+      )
   }
 }
