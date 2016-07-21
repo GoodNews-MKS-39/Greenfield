@@ -120,12 +120,12 @@ class Comments extends React.Component {
       <ModalContainer onClose={this.props.onClose}>
         <ModalDialog onClose={this.props.onClose} className='comments'>
           <h2>{this.props.title}</h2>
+          <h3>Comments:</h3>
           { this.props.comments
             .map(comment => {
               return (
                 <div className='single_comment'>
-                <p>{comment.username}</p>
-                <p>{comment.msg}</p>
+                <p><div className='comment-username'>{comment.username}: </div>{comment.msg}</p>
                 </div>
                 )
             })
