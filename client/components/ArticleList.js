@@ -48,11 +48,13 @@ export default class ArticleList extends React.Component {
     }))
   }
   openComments(title) {
+    console.log('opening comments')
     this.setState({articleTitle: title})
     fetchComments(title)
     .then(comments => {
       this.setState({comments: comments})
       this.setState({showComments: true});
+      console.log('showing comments modal', this.state.showComments)
     })
   }
   closeComments() {
@@ -88,6 +90,7 @@ export default class ArticleList extends React.Component {
             <aside className="photo-box-caption">
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
               <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
+              <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
             </aside>
           </div>
         </div>
@@ -103,6 +106,10 @@ export default class ArticleList extends React.Component {
           <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div> 
+        {this.state.showComments ? 
+          <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
+          :
+          null}
         {this.renderArticles(this.state.articles)}
       </div>
     )
