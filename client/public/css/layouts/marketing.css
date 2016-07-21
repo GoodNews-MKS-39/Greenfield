@@ -165,6 +165,7 @@ button.pure-button-primary {
     border-radius: 5px;
     line-height: 1em;
     display: inline-block;
+    letter-spacing: 2px;
 }
 
 /* This is the subheading that appears on the blue section */
