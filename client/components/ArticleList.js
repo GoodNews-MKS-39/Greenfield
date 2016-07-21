@@ -70,7 +70,6 @@ export default class ArticleList extends React.Component {
   }
 
   renderArticles(articles) {
-    console.log("Articles front end: 48:", articles)
     // sorts articles by emotion score by what the current mood is.
     if(this.state.mood){
       var sortObject = {
