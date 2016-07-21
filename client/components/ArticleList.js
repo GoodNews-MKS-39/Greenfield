@@ -102,7 +102,7 @@ export default class ArticleList extends React.Component {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className="pure-g">
-        <div className="article_header">
+        <div className="splash-container article_header">
           <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div> 
@@ -110,7 +110,9 @@ export default class ArticleList extends React.Component {
           <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
+        <div className="content-wrapper" >
         {this.renderArticles(this.state.articles)}
+        </div>
       </div>
     )
   }
@@ -153,7 +155,7 @@ class Comments extends React.Component {
 
           <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
           <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
-            <button type='submit'>Submit</button>
+            <button className="pure-button pure-button-primary" type='submit'>Submit</button>
 
           </form>
         </ModalDialog>
