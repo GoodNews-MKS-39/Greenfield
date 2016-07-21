@@ -103,32 +103,16 @@ export default class ArticleList extends React.Component {
     return (
       <div className="pure-g">
         <div className="splash-container article_header">
-          <h1>Have You Heard The News</h1>
+          <h1>Good News or Bad News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
-        </div>
-        <div className="content-wrapper">
-        {this.state.articles
-          .map((article) => {
-            return (
-              <div key={this.state.articles.indexOf(article)} className="photo-box u-1 u-med-1-3 u-lrg-1-4">
-                <div>
-                  <img className="article" src={article.urlToImage} />
-                  <aside className="photo-box-caption">
-                    <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-                    <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
-                  </aside>
-
-                </div>
-              </div>
-            )
-          })
-        }
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
+        <div className="content-wrapper" >
         {this.renderArticles(this.state.articles)}
+        </div>
       </div>
     )
   }
@@ -171,7 +155,7 @@ class Comments extends React.Component {
 
           <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
           <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
-            <button type='submit'>Submit</button>
+            <button className="pure-button pure-button-primary" type='submit'>Submit</button>
 
           </form>
         </ModalDialog>
