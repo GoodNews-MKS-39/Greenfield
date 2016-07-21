@@ -25,7 +25,6 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
-    console.log("testing")
     fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
@@ -34,16 +33,28 @@ export default class ArticleList extends React.Component {
         article.sentimentComparative = result.comparative;
         return article;
       })
+      x.articles = this.removeDuplicates(x.articles);
       this.setState({ articles: this.state.articles.concat(x.articles) })
     }) 
   }
   removeDuplicates(array) {
-    array.filter(this.onlyUnique)
+    var uniqueArticles = [];
+    // Holds titles of articles that have already been pushed into the uniqueArticles array
+    var uniqueTitles = [];
+    // searches for unique article titles and adds them to the uniqueArticles array which will be returned
+    array.forEach(article => {
+      if(uniqueTitles.indexOf(article.title) === -1){
+        uniqueTitles.push(article.title);
+        uniqueArticles.push(article);
+      }
+    })
+    return uniqueArticles;
   }
   getSources() {
     fetchAllSources()
     .then(source => source.forEach(source => {
-      if(source.id !== 'buzzfeed' && source.id !== 'redditrall') {
+      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
+      if(sourcesToFilter.indexOf(source.id) === -1) {
         this.getArticles(source)
       }
     }))
