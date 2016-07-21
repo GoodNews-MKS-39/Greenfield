@@ -59,10 +59,11 @@ export default class ArticleList extends React.Component {
     // show all articles for the given time period (eg. today) filtered for the mood variable in the app component
     return (
       <div className="pure-g">
-        <div className="article_header">
-          <h1>Good News or Bad News</h1>
+        <div className="splash-container article_header">
+          <h1>Have You Heard The News</h1>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div>
+        <div className="content-wrapper">
         {this.state.articles
           .map((article) => {
             return (
@@ -79,11 +80,8 @@ export default class ArticleList extends React.Component {
             )
           })
         }
+        </div>
       </div>
     )
   }
 }
-
-<aside class="photo-box-caption">
-                <span>by <a href="http://www.dillonmcintosh.tumblr.com/">Dillon McIntosh</a></span>
-            </aside>
