@@ -12,11 +12,11 @@ export default class UserControls extends React.Component {
       <div className='user-controls'>
         <button className='pure-button pure-button-primary goodNews' onClick={() => {
           document.title = "Good News"
-          this.handleButtonClick.bind(this, "good")
+          this.handleButtonClick("good")
         }}>Good News</button>
         <button className='pure-button pure-button-primary badNews' onClick={() => {
           document.title = "Bad News"
-          this.handleButtonClick.bind(this, "bad")
+          this.handleButtonClick("bad")
         }}>Bad News</button>
       </div>
     )
