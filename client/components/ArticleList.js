@@ -58,6 +58,13 @@ export default class ArticleList extends React.Component {
       console.log('showing comments modal', this.state.showComments)
     })
   }
+  updateComments(){
+    let title = this.state.articleTitle;
+    fetchComments(title)
+    .then(comments => {
+      this.setState({comments: comments})
+    })
+  }
   closeComments() {
     this.setState({showComments: false})
   }
@@ -111,7 +118,7 @@ export default class ArticleList extends React.Component {
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
         </div> 
         {this.state.showComments ? 
-          <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
+          <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
         <div className="content-wrapper" >
@@ -125,15 +132,27 @@ export default class ArticleList extends React.Component {
 class Comments extends React.Component {
   constructor() {
     super()
+    this.state = {
+     msg: '',
+     username: ''
+    }
   }
   submitComment(){
     let title = this.props.title;
     let username = this.state.username;
     let msg = this.state.msg;
-    postComment(title, username, msg)
-    .then(resp => {
-      console.log('yay we added a comment... resp: ', resp)
-    })
+
+    if (username && msg) {
+      postComment(title, username, msg)
+      .then(resp => {
+        console.log('yay we added a comment... resp: ', resp)
+        this.setState({
+          username: '',
+          msg: ''
+        })
+        this.props.updateComments()
+      })  
+    }
   }
 
   render() {
@@ -142,24 +161,32 @@ class Comments extends React.Component {
       <ModalContainer onClose={this.props.onClose}>
         <ModalDialog onClose={this.props.onClose} className='comments'>
           <h2>{this.props.title}</h2>
+          <h3>Comments:</h3>
+          <div className='comment-msgs'>
           { this.props.comments
             .map(comment => {
               return (
                 <div className='single_comment'>
-                <p>{comment.username}</p>
-                <p>{comment.msg}</p>
+                <p><div className='comment-username'>{comment.username}: </div>{comment.msg}</p>
                 </div>
                 )
             })
           }
+          </div>
           <form name="newComment" onSubmit={e => {
             e.preventDefault();
-            this.submitComment()
+            this.submitComment();
           }}>
 
+<<<<<<< HEAD
           <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
           <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
             <button className="pure-button pure-button-primary" type='submit'>Submit</button>
+=======
+          <div> <input className='new-comment' type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})} value={this.state.username}/> </div>
+          <div> <textarea className='new-comment' form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})} value={this.state.msg}/> </div>
+            <button type='submit'>Submit</button>
+>>>>>>> issue8
 
           </form>
         </ModalDialog>
