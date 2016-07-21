@@ -53,7 +53,7 @@ export default class ArticleList extends React.Component {
   getSources() {
     fetchAllSources()
     .then(source => source.forEach(source => {
-      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde']
+      let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
       if(sourcesToFilter.indexOf(source.id) === -1) {
         this.getArticles(source)
       }
