@@ -26,7 +26,6 @@ export default class ArticleList extends React.Component {
   }
   getArticles(source) {
     fetchAllArticles(source.id).then((x)=> {
-      console.log("X:", x)
       x.articles = x.articles.map((article) => {
         article.source = x.source;
         var result = Sentiment(article.title);
@@ -40,7 +39,9 @@ export default class ArticleList extends React.Component {
   }
   removeDuplicates(array) {
     var uniqueArticles = [];
+    // Holds titles of articles that have already been pushed into the uniqueArticles array
     var uniqueTitles = [];
+    // searches for unique article titles and adds them to the uniqueArticles array which will be returned
     array.forEach(article => {
       if(uniqueTitles.indexOf(article.title) === -1){
         uniqueTitles.push(article.title);
