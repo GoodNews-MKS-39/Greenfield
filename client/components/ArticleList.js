@@ -54,6 +54,13 @@ export default class ArticleList extends React.Component {
       this.setState({showComments: true});
     })
   }
+  updateComments(){
+    let title = this.state.articleTitle;
+    fetchComments(title)
+    .then(comments => {
+      this.setState({comments: comments})
+    })
+  }
   closeComments() {
     this.setState({showComments: false})
   }
@@ -76,7 +83,7 @@ export default class ArticleList extends React.Component {
         </div>
 
         {this.state.showComments ?
-          <Comments onClose={this.closeComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
+          <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           : null} 
         { this.state.articles
           .map((article) => {
@@ -103,15 +110,27 @@ export default class ArticleList extends React.Component {
 class Comments extends React.Component {
   constructor() {
     super()
+    this.state = {
+     msg: '',
+     username: ''
+    }
   }
   submitComment(){
     let title = this.props.title;
     let username = this.state.username;
     let msg = this.state.msg;
-    postComment(title, username, msg)
-    .then(resp => {
-      console.log('yay we added a comment... resp: ', resp)
-    })
+
+    if (username && msg) {
+      postComment(title, username, msg)
+      .then(resp => {
+        console.log('yay we added a comment... resp: ', resp)
+        this.setState({
+          username: '',
+          msg: ''
+        })
+        this.props.updateComments()
+      })  
+    }
   }
 
   render() {
@@ -134,11 +153,11 @@ class Comments extends React.Component {
           </div>
           <form name="newComment" onSubmit={e => {
             e.preventDefault();
-            this.submitComment()
+            this.submitComment();
           }}>
 
-          <div> <input className='new-comment' type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
-          <div> <textarea className='new-comment' form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
+          <div> <input className='new-comment' type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})} value={this.state.username}/> </div>
+          <div> <textarea className='new-comment' form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})} value={this.state.msg}/> </div>
             <button type='submit'>Submit</button>
 
           </form>
