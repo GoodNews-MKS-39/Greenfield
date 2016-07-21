@@ -121,6 +121,7 @@ class Comments extends React.Component {
         <ModalDialog onClose={this.props.onClose} className='comments'>
           <h2>{this.props.title}</h2>
           <h3>Comments:</h3>
+          <div className='comment-msgs'>
           { this.props.comments
             .map(comment => {
               return (
@@ -130,13 +131,14 @@ class Comments extends React.Component {
                 )
             })
           }
+          </div>
           <form name="newComment" onSubmit={e => {
             e.preventDefault();
             this.submitComment()
           }}>
 
-          <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
-          <div> <textarea form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
+          <div> <input className='new-comment' type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
+          <div> <textarea className='new-comment' form='newComment' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
             <button type='submit'>Submit</button>
 
           </form>
