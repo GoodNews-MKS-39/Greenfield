@@ -1,72 +1,9 @@
-@font-face {
-    font-family: DSWalbaumfraktur;
-    src: url(img/DSWalbaumfraktur.ttf);
-}
-
-/* /////// SPLASH PAGE CSS //////// */
-.moodnews_logo{
-  width: 555px;
-  margin: auto;
-  padding: 15px;
-  display: block;
-}
-
-p.lead {
-  font-size: 24px;
-  font-family: 'Merriweather', serif;
-}
-
-.news_div-splashpage h1 {
-  font-family: DSWalbaumfraktur;
-  font-size: 8em;
-  color: #2f3893;
-}
-
-.news_div-splashpage h3 {
-  color: #214bff;
-}
-
-
-/* add background img to splash page*/
-.splashpage_background {
-  background: url('img/news_background.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  min-height: 100%;
-  min-width: 1024px;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-button {
-  margin-top: 15px;
-  background-color: #fec41a;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-
-}
-
-.news_div-splashpage {
-  background-color: rgba(255,255,255,.75);
-  width: 50%;
-  margin: 80px auto;
-  padding: 30px 20px;
-  border-radius: 10px;
-}
-
-
 
 /* ///////// ARTICLES //////// */
 body {
   text-align: center;
   background-color: #005fb3;
-    background: url('img/sunflower_tall.jpg') no-repeat center center fixed;;
+    background: url('img/yinandyang.jpg') no-repeat center center fixed;;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -83,7 +20,15 @@ h3 {
 h1 {
   font-family: DSWalbaumfraktur;
   font-size: 8em;
-  color: #fec41a;
+  color: white;
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 }
 
 p {
@@ -99,16 +44,14 @@ p {
 .single_article {
   height: 550px;
   display: inline-block;
-  background-color: rgba(255,255,255,.75);
+  background-color: gray;
   margin: 20px auto;
   padding: 10px;
   border-radius: 10px;
   justify-content: center;
 }
 
-.single_article:hover {
-   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-}
+
 
 .single_article h3 {
   font-size: 1.4em;
@@ -124,12 +67,27 @@ p {
     display: flex;              /* establish flex container */
     justify-content: center;    /* center items vertically, in this case */
     align-items: center;        /* center items horizontally, in this case */
-    height: 200px;
+    height: 150px;
     text-align: left;
     background-color: white;
     border-radius: 10px;
 }
+.article_p:hover {
+   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+   opacity:0.5;
 
+}
+
+.text {
+  opacity:0;
+}
+.article_p:hover .text {
+  opacity:0.6;
+  text-align:center;;
+  color:#000000;
+  font-size:20px;
+  font-family:"Times New Roman", Times, serif;
+}
 .article_p p {
     width: 80%;
     margin: 5px;
@@ -139,4 +97,9 @@ p {
 .comment-box {
   width: 50%;
   height: 125px;
+}
+/* /////////// Source Image CSS \\\\\\\\\\\ */
+img.source-image {
+  width: 50px;
+  height: auto;
 }
