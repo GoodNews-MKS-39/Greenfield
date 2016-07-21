@@ -10,8 +10,8 @@ export default class UserControls extends React.Component {
   render() {
     return (
       <div className='user-controls'>
-        <button className='goodNews' onClick={this.handleButtonClick}>Good News</button>
-        <button className='badNews' onClick={this.handleButtonClick}>Bad News</button>
+        <button className='goodNews' onClick={this.handleButtonClick.bind(this, "good")}>Good News</button>
+        <button className='badNews' onClick={this.handleButtonClick.bind(this, "bad")}>Bad News</button>
       </div>
     )
   }
