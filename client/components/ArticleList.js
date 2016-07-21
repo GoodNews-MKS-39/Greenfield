@@ -25,6 +25,7 @@ export default class ArticleList extends React.Component {
     this.getSources()
   }
   getArticles(source) {
+    console.log("testing")
     fetchAllArticles(source.id).then((x)=> {
       x.articles = x.articles.map((article) => {
         article.source = x.source;
@@ -63,6 +64,9 @@ export default class ArticleList extends React.Component {
       var audio = new Audio('textToSpeech.wav');
       audio.play();
     })
+  }
+  changeMood(mood) {
+
   }
 
   renderArticles(articles) {
@@ -104,7 +108,7 @@ export default class ArticleList extends React.Component {
       <div className='daily_articles'>
         <div className="article_header">
           <h1>Good News or Bad News</h1>
-          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
+          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
         </div> 
         {this.renderArticles(this.state.articles)}
       </div>
