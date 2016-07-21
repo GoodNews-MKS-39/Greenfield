@@ -1,5 +1,7 @@
 // this houses all the articles after a mood exists
 import React from 'react';
+import { fetchComments, postComment } from '../dbModels/comments.js'
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/articles.js';
 import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
@@ -13,6 +15,7 @@ export default class ArticleList extends React.Component {
     this.state = {
       articles: [],
       mood: 'good'
+      showComments: false,
     };
   }
   onlyUnique(value, index, self) {
@@ -31,10 +34,7 @@ export default class ArticleList extends React.Component {
         return article;
       })
       this.setState({ articles: this.state.articles.concat(x.articles) })
-      return x
-    })
-    .then((articles) => {
-    })
+    }) 
   }
   removeDuplicates(array) {
     array.filter(this.onlyUnique)
@@ -46,6 +46,17 @@ export default class ArticleList extends React.Component {
         this.getArticles(source)
       }
     }))
+  }
+  openComments(title) {
+    this.setState({articleTitle: title})
+    fetchComments(title)
+    .then(comments => {
+      this.setState({comments: comments})
+      this.setState({showComments: true});
+    })
+  }
+  closeComments() {
+    this.setState({showComments: false})
   }
   textToSpeech(words) {
     fetchVoice(words).then(something => {
@@ -80,6 +91,7 @@ export default class ArticleList extends React.Component {
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
               <p> { article.description }<div className="text">Text to Speech</div> <a href={article.url} target="_blank">(Read more)</a></p>
             </div>
+            <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
           </div>
         </div>
       )
@@ -99,3 +111,50 @@ export default class ArticleList extends React.Component {
     )
   }
 }
+
+class Comments extends React.Component {
+  constructor() {
+    super()
+  }
+  submitComment(){
+    let title = this.props.title;
+    let username = this.state.username;
+    let msg = this.state.msg;
+    postComment(title, username, msg)
+    .then(resp => {
+      console.log('yay we added a comment... resp: ', resp)
+    })
+  }
+
+  render() {
+
+    return (
+      <ModalContainer onClose={this.props.onClose}>
+        <ModalDialog onClose={this.props.onClose} className='comments'>
+          <h2>{this.props.title}</h2>
+          { this.props.comments
+            .map(comment => {
+              return (
+                <div className='single_comment'>
+                <p>{comment.username}</p>
+                <p>{comment.msg}</p>
+                </div>
+                )
+            })
+          }
+          <form name="newComment" onSubmit={e => {
+            e.preventDefault();
+            this.submitComment()
+          }}>
+
+          <div> <input type='text' placeholder='name' name="username" onChange={e => this.setState({username: e.target.value})}/> </div>
+          <div> <input type='text' className='comment-box' placeholder='Enter your comment here' name="msg" onChange={e => this.setState({msg: e.target.value})}/> </div>
+            <button type='submit'>Submit</button>
+
+          </form>
+        </ModalDialog>
+      </ModalContainer>
+      )
+  }
+}
+
