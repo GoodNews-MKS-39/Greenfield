@@ -14,8 +14,8 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       articles: [],
-      mood: 'good'
-      showComments: false,
+      mood: 'good',
+      showComments: false
     };
   }
   onlyUnique(value, index, self) {
