@@ -104,6 +104,6 @@ input {
 /* /////////// Source Image CSS \\\\\\\\\\\ */
 img.source-image {
   width: 50px;
-  height: 40px;
+  height: auto;
   background-color: white;
 }
