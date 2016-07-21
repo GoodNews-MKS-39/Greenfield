@@ -17,7 +17,7 @@ h3 {
   color: #214bff;
 }
 
-h1 {
+/*h1 {
   font-family: DSWalbaumfraktur;
   font-size: 8em;
   color: white;
@@ -29,7 +29,7 @@ h1 {
       1px -1px 0 #000,
       -1px 1px 0 #000,
        1px 1px 0 #000;
-}
+}*/
 
 p {
   font-family: 'Open Sans', sans-serif;
