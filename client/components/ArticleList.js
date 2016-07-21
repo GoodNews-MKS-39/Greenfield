@@ -116,6 +116,9 @@ export default class ArticleList extends React.Component {
   changeMood(mood) {
     this.setState({mood: mood})
   }
+  redirectToArticle(articleURL) {
+    window.location.href = articleURL;
+  }
 
   renderArticles(articles) {
     // sorts articles by emotion score by what the current mood is.
@@ -139,8 +142,11 @@ export default class ArticleList extends React.Component {
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
-              <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
+              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - 
+              <button type="button" onClick={(e) =>{
+                e.preventDefault()
+                this.redirectToArticle(article.url)}} target="_blank">Full article</button></p>
+              <button onClick={e => this.openComments(article.title)}>Comments!</button>
             </aside>
           </div>
         </div>
