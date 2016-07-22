@@ -7,6 +7,9 @@ import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 import Sentiment from 'sentiment';
 import * as Logo from '../models/sourceLogo.js'
+import RC from 'rc-progress';
+
+var ProgressBar = RC.Line
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -15,7 +18,8 @@ export default class ArticleList extends React.Component {
     this.state = {
       articles: [],
       mood: 'good',
-      showComments: false
+      showComments: false,
+      progressPercent: 100
     };
   }
   onlyUnique(value, index, self) {
@@ -28,7 +32,7 @@ export default class ArticleList extends React.Component {
     var i = 0;
     var articles = [];
     // Start recursion
-    getFetchCall.call(this);  
+    getFetchCall.call(this);
 
     function getFetchCall() {
       // fetch articles on the current source
@@ -38,7 +42,7 @@ export default class ArticleList extends React.Component {
         result.articles = result.articles
         .map((article) => {
           // Add source to each article object
-          article.source = sources[i];
+          article.source = sources[i].id;
           // Get and set Sentiment scores for current article
           var result = Sentiment(article.title);
           article.sentimentScore = result.score;
@@ -156,6 +160,10 @@ export default class ArticleList extends React.Component {
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
+          {this.state.articles.length > 0 ?
+            <ProgressBar percent={this.state.progressPercent} strokeWidth="4" strokeColor="#D3D3D3" />
+            :
+            null}
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
