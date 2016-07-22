@@ -159,7 +159,7 @@ export default class ArticleList extends React.Component {
                    className="shake-slow source-image" src={Logo.findSourceLogo(article.source)} 
                    onMouseOver={e => e.target.src="/img/sound-recording.png"} 
                    onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
-              <p>{ article.title } - </p>
+              <p>{article.title}</p>
               <button type="button" className="button-xsmall pure-button" onClick={(e) =>{
                 e.preventDefault()
                 this.redirectToArticle(article.url)}} target="_blank">Full article</button>
@@ -184,7 +184,7 @@ export default class ArticleList extends React.Component {
           {!this.state.articles ?
             <div className="progress">
               <span>Loading articles...</span>
-              <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
+              <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#3da8df" />
             </div>
             :
             null}
