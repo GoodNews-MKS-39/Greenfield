@@ -10,6 +10,8 @@ import * as Logo from '../models/sourceLogo.js'
 import RC from 'rc-progress';
 
 var ProgressBar = RC.Line
+var waitingForSpeech = false;
+var audio = new Audio('textToSpeech.wav');
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -123,10 +125,16 @@ export default class ArticleList extends React.Component {
     this.setState({showComments: false})
   }
   textToSpeech(words) {
-    fetchVoice(words).then(something => {
-      var audio = new Audio('textToSpeech.wav');
-      audio.play();
-    })
+    if(!waitingForSpeech){
+      document.body.style.cursor = 'wait';
+      waitingForSpeech = true;
+      fetchVoice(words).then(something => {
+        audio.load();
+        document.body.style.cursor = 'default';
+        waitingForSpeech = false;
+        audio.play();
+      })
+    }
   }
   changeMood(mood) {
     this.setState({mood: mood})
