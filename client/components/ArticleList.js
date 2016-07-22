@@ -18,7 +18,6 @@ export default class ArticleList extends React.Component {
     super(props);
 
     this.state = {
-      articles: [],
       showComments: false,
       progressPercent: 0
     };
@@ -179,7 +178,7 @@ export default class ArticleList extends React.Component {
           <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
           <div className="progress">
-          {this.state.articles.length <= 0 ?
+          {!this.state.articles ?
             <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
             :
             null}
@@ -189,9 +188,9 @@ export default class ArticleList extends React.Component {
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
-        <div className="content-wrapper" >
+        {this.state.articles ? <div className="content-wrapper" >
         {this.renderArticles(this.state.articles)}
-        </div>
+        </div> : ''}
       </div>
     )
   }
