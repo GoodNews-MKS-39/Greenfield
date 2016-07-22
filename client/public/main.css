@@ -105,12 +105,7 @@ img.source-image {
   background-color: white;
   opacity: 0.7;
 }
-img.source-image:hover {
-  -moz-box-shadow: 0 0 10px #ccc;
-  -webkit-box-shadow: 0 0 10px #ccc;
-  box-shadow: 0 0 10px #ccc;
-  background: url(./img/sound-recording.png) ;
-}
+
 .profile-img-container {
     position: absolute;
     width:50%;
