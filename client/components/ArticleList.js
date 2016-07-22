@@ -151,7 +151,8 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              <img onClick={this.textToSpeech.bind(null, article.description)} 
+            <img onClick={this.textToSpeech.bind(null, article.description)}
++                  onTouchStart={this.textToSpeech.bind(null, article.description)}
                    className="source-image" src={Logo.findSourceLogo(article.source)} 
                    onMouseOver={e => e.target.src="/img/sound-recording.png"} 
                    onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
