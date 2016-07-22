@@ -24,11 +24,9 @@ Watson api - http://www.ibm.com/watson/developercloud/text-to-speech.html
 sentiment - https://www.npmjs.com/package/sentiment
 
 # Backlog
-- Backdating
-- Add news sources
-- Search by keyword
 - Add authentication
-- Filter for other 4 emotions (display angry articles)
+- Search by keyword and date
+- Filter for other 3 emotions (display angry articles)
 
 # Details
 ### Components:
