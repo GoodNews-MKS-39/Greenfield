@@ -18,7 +18,7 @@ export default class ArticleList extends React.Component {
     this.state = {
       articles: [],
       showComments: false,
-      progressPercent: 100
+      progressPercent: 0
     };
   }
   onlyUnique(value, index, self) {
@@ -53,6 +53,8 @@ export default class ArticleList extends React.Component {
         articles = articles.concat(result.articles);
         // Check to see if there are any more sources to fetch
         if(i < sources.length - 1){
+          this.setState({ progressPercent: (i / sources.length) * 100 + 15 })
+          console.log(this.state.progressPercent)
           i++;
           // Start recursion again
           getFetchCall.call(this, sources[i])
@@ -135,7 +137,6 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              {console.log(Logo.findSourceLogo(article.source))}
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
               <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
               <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
@@ -154,8 +155,8 @@ export default class ArticleList extends React.Component {
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
-          {this.state.articles.length > 0 ?
-            <ProgressBar percent={this.state.progressPercent} strokeWidth="4" strokeColor="#D3D3D3" />
+          {this.state.articles.length <= 0 ?
+            <ProgressBar percent={this.state.progressPercent} strokeWidth="4" strokeColor="#ffffff" />
             :
             null}
         </div> 
