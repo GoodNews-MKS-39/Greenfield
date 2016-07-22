@@ -85,6 +85,12 @@ button.pure-button-primary {
     margin: 0 10px 0 10px;
 }
 
+.button-xsmall {
+    font-size: 60%;
+    width: 86px;
+    margin: 0 5px;
+}
+
 /*
  * -- MENU STYLES --
  * I want to customize how my .pure-menu looks at the top of the page
