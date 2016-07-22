@@ -56,10 +56,7 @@ export default class ArticleList extends React.Component {
         } else {
           // No more sources, remove duplicates and set the articles state
           articles = this.removeDuplicates(articles);
-
-                    console.log(articles)
           articles = this.sortGood(articles)
-
           this.setState({ articles: articles })
         }
       })
