@@ -38,7 +38,7 @@ export default class ArticleList extends React.Component {
         result.articles = result.articles
         .map((article) => {
           // Add source to each article object
-          article.source = sources[i];
+          article.source = sources[i].id;
           // Get and set Sentiment scores for current article
           var result = Sentiment(article.title);
           article.sentimentScore = result.score;
@@ -56,10 +56,28 @@ export default class ArticleList extends React.Component {
         } else {
           // No more sources, remove duplicates and set the articles state
           articles = this.removeDuplicates(articles);
+
+                    console.log(articles)
+          articles = this.sortGood(articles)
+
           this.setState({ articles: articles })
         }
       })
     }
+  }
+  sortGood(articles) {
+    var sortObject = {
+      'good': [-1, 1],
+      'bad': [1, -1]
+    };
+    return articles.sort((a, b) => {
+      if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
+      else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
+      else return 0;
+    })
+  }
+  reverseMood() {
+    this.setState({articles: this.state.articles.reverse()})
   }
   removeDuplicates(array) {
     var uniqueArticles = [];
@@ -118,19 +136,6 @@ export default class ArticleList extends React.Component {
   }
 
   renderArticles(articles) {
-    // sorts articles by emotion score by what the current mood is.
-    if(this.state.mood){
-      var sortObject = {
-        'good': [-1, 1],
-        'bad': [1, -1]
-      };
-      articles.sort((a, b) => {
-        if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
-        else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
-        else return 0;
-      })
-    }
-
     // Returning article elements to be displayed
     return articles.map((article) => {
       return (
@@ -138,6 +143,7 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
+              {console.log(Logo.findSourceLogo(article.source))}
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
               <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
               <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
@@ -155,7 +161,7 @@ export default class ArticleList extends React.Component {
         <div className="splash-container">
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
-          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
+          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
