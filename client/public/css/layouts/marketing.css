@@ -285,6 +285,6 @@ button.pure-button-primary {
 @media (min-width: 78em) {
     /* We increase the header font size even more */
     .splash-head {
-        font-size: 300%;
+        font-size: 420%;
     }
 }
