@@ -222,6 +222,11 @@ class Comments extends React.Component {
     }
   }
 
+  componentDidMount(){
+    console.log('live comments woo woo!!!')
+    setInterval(this.props.updateComments, 500);
+  }
+
   render() {
 
     return (
