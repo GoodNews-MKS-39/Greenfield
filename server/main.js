@@ -11,6 +11,7 @@ var Comments = require('./comments')
 var app = express();
 
 app.use(express.static(path.join(__dirname, "../client/public")));
+app.use(express.static(path.join(__dirname, '../bower_components/csshake')));
 app.use(bodyParser.json());
 
 app.get('/app-bundle.js',
