@@ -35,6 +35,7 @@ The goal of this project is to create a news website that only displays positive
 # Installation
 - To clone master to your machine typing in terminal `git clone` and the web URL then run
 - cd into the folder and type in terminal `npm install` then run
+- then type `bower install csshake` then run
 - after installation is completed then type in `npm start` then run
 - go to localhost:4000 on web browser 
 
