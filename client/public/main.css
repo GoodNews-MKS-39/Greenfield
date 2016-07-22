@@ -89,6 +89,7 @@ img.source-image {
   border-radius: 10%;
   background-color: white;
   opacity: 0.7;
+  padding: 5px;
 }
 
 .comment-username {
