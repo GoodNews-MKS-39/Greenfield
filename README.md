@@ -17,10 +17,11 @@ TEAM MEMBERS
 - Carlo DiLorenzo
 
 # Project Summary
-The goal of this project is to create a news website that only displays positive and negative articles. Using the [News api](https://newsapi.org) we can gather stories from 26 different news sources. A brief summary of each article among with an image is displayed. [IBM's Watson](http://www.ibm.com/watson/developercloud/text-to-speech.html) has an api that reads a synopsis of there article when the reader clicks on there logo image of the article. We use these scores as a filter by passing each article summary into Watson and rendering only the ones with a 'joy' score above a certain number (0.3).
+The goal of this project is to create a news website that only displays positive and negative articles. Using the [News api](https://newsapi.org) we can gather stories from 26 different news sources. A brief summary of each article among with an image is displayed. [IBM's Watson](http://www.ibm.com/watson/developercloud/text-to-speech.html) has an api that reads a synopsis of the article when the reader clicks on there logo image. We use [sentiment](https://www.npmjs.com/package/sentiment) to analyze the tone of the articles. Sentiment gives the article a score, these scores are used to filter each article to good news and bad news.
 
 News api - https://newsapi.org
 Watson api - http://www.ibm.com/watson/developercloud/text-to-speech.html
+sentiment - https://www.npmjs.com/package/sentiment
 
 # Backlog
 - Backdating
