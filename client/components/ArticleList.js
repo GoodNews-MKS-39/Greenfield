@@ -179,7 +179,7 @@ export default class ArticleList extends React.Component {
       <div className="pure-g">
         <div className="splash-container">
           <h1 className="splash-head">Have You Heard The News</h1>
-          <p  className="splash-subhead">An interactive news aggregate that reads the articles for you!</p> <p className="splash-subhead" style={{'margin-bottom': '18px'}}>Try it out by clicking an article source logo.</p>
+          <p  className="splash-subhead">An interactive news aggregate that reads the articles for you!</p> <p className="splash-subhead" style={{'marginBottom': '18px'}}>Try it out by clicking an article source logo.</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
           {!this.state.articles ?
             <div className="progress">
