@@ -14,7 +14,6 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       articles: [],
-      mood: 'good',
       showComments: false
     };
   }
@@ -63,13 +62,9 @@ export default class ArticleList extends React.Component {
     }
   }
   sortGood(articles) {
-    var sortObject = {
-      'good': [-1, 1],
-      'bad': [1, -1]
-    };
     return articles.sort((a, b) => {
-      if(a.sentimentScore > b.sentimentScore) return sortObject[this.state.mood][0];
-      else if(b.sentimentScore > a.sentimentScore) return sortObject[this.state.mood][1];
+      if(a.sentimentScore > b.sentimentScore) return -1;
+      else if(b.sentimentScore > a.sentimentScore) return 1;
       else return 0;
     })
   }
@@ -128,10 +123,6 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
-  changeMood(mood) {
-    this.setState({mood: mood})
-  }
-
   renderArticles(articles) {
     // Returning article elements to be displayed
     return articles.map((article) => {
