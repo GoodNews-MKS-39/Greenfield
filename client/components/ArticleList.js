@@ -180,7 +180,10 @@ export default class ArticleList extends React.Component {
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
           <div className="progress">
           {this.state.articles.length <= 0 ?
-            <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
+            <div>
+              <span>Loading articles...</span>
+              <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
+            </div>
             :
             null}
           </div>
