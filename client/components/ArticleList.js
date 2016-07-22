@@ -137,7 +137,6 @@ export default class ArticleList extends React.Component {
     }
   }
   changeMood(mood) {
-    console.log(mood, this.state.mood)
     if(mood !== this.state.mood){
       this.setState({mood: mood})
       this.reverseMood();
