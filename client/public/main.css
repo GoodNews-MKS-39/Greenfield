@@ -128,3 +128,9 @@ img.source-image {
   margin-bottom: 15px;
 }
 
+/* ------------Progress Bar--------------- */
+.progress {
+  background-color: #1f8dd6;
+  margin: 10px 25%;
+  box-shadow: 0px 0px #1f8dd6;
+}

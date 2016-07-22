@@ -53,7 +53,7 @@ export default class ArticleList extends React.Component {
         articles = articles.concat(result.articles);
         // Check to see if there are any more sources to fetch
         if(i < sources.length - 1){
-          this.setState({ progressPercent: (i / sources.length) * 100 + 15 })
+          this.setState({ progressPercent: (i / sources.length) * 100 })
           console.log(this.state.progressPercent)
           i++;
           // Start recursion again
@@ -167,10 +167,12 @@ export default class ArticleList extends React.Component {
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
+          <div className="progress">
           {this.state.articles.length <= 0 ?
-            <ProgressBar percent={this.state.progressPercent} strokeWidth="4" strokeColor="#ffffff" />
+            <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
             :
             null}
+          </div>
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
