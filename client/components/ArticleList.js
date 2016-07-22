@@ -150,13 +150,13 @@ export default class ArticleList extends React.Component {
     // Returning article elements to be displayed
     return articles.map((article) => {
       return (
-        <div key={this.state.articles.indexOf(article)} className="photo-box u-1 u-med-1-3 u-lrg-1-4">
+        <div key={this.state.articles.indexOf(article)} className="shake-trigger photo-box u-1 u-med-1-3 u-lrg-1-4">
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
             <img onClick={this.textToSpeech.bind(null, article.description)}
                    onTouchStart={this.textToSpeech.bind(null, article.description)}
-                   className="source-image" src={Logo.findSourceLogo(article.source)} 
+                   className="shake-slow source-image" src={Logo.findSourceLogo(article.source)} 
                    onMouseOver={e => e.target.src="/img/sound-recording.png"} 
                    onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
               <p>{ article.title } - </p>
@@ -178,7 +178,7 @@ export default class ArticleList extends React.Component {
     return (
       <div className="pure-g">
         <div className="splash-container">
-          <h1 className="splash-head">Have You Heard The News</h1>
+          <h1 className="shake-crazy splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">An interactive news aggregate that reads the articles for you!</p> <p className="splash-subhead" style={{'margin-bottom': '18px'}}>Try it out by clicking an article source logo.</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
           {!this.state.articles ?
