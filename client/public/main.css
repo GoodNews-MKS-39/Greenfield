@@ -111,6 +111,8 @@ img.source-image {
   max-width:500px;
   max-height:300px;
   overflow-y: auto;
+  text-align: left;
+  margin-left: 150px;
 }
 
 .new-comment {
