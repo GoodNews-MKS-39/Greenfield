@@ -137,4 +137,11 @@ img.source-image {
   background-color: #1f8dd6;
   margin: 10px 25%;
   box-shadow: 0px 0px #1f8dd6;
+  height: 75px;
+}
+
+.progress span {
+  width: 100%;
+  letter-spacing: 0em;
+  color: white;
 }
