@@ -1,0 +1,20 @@
+{
+  "name": "good-news",
+  "description": "This is a repo for MKS-39 students' Greenfield project.",
+  "main": "index.js",
+  "authors": [
+    "davidlewallen <lewallen.david@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/FullStackWizards/Greenfield",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "csshake": "*"
+  }
+}
