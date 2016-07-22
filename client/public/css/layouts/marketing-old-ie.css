@@ -171,6 +171,7 @@ button.pure-button-primary {
     font-weight: 100;
     border-radius: 5px;
     line-height: 1em;
+    letter-spacing: 2px;
 }
 
 /* This is the subheading that appears on the blue section */
@@ -189,7 +190,7 @@ button.pure-button-primary {
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 87%;
+    top: 60%;
     width: 100%;
     min-height: 12%;
     z-index: 2;

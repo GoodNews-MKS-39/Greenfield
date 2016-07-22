@@ -2,8 +2,7 @@
 /* ///////// ARTICLES //////// */
 body {
   text-align: center;
-  background-color: #005fb3;
-    background: url('img/yinandyang.jpg') no-repeat center center fixed;;
+  background-color: #1f8dd6;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -15,20 +14,6 @@ h3 {
   font-family: 'Merriweather', serif;
   font-weight: bold;
   color: #214bff;
-}
-
-h1 {
-  font-family: DSWalbaumfraktur;
-  font-size: 8em;
-  color: white;
-  -webkit-text-stroke: 1px black;
-   color: white;
-   text-shadow:
-       3px 3px 0 #000,
-     -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
 }
 
 p {
@@ -94,7 +79,7 @@ p {
 }
 
 .comment-box {
-  width: 50%;
+  width: 75%;
   height: 125px;
 }
 /* /////////// Source Image CSS \\\\\\\\\\\ */
@@ -106,28 +91,40 @@ img.source-image {
   opacity: 0.7;
 }
 
-.profile-img-container {
-    position: absolute;
-    width:50%;
+.comment-username {
+  display: inline;
+  font-weight: bold;
 }
 
-.profile-img-container img:hover {
-    opacity: 0.5;
-    z-index: 501;
+.comments h2 {
+  color: grey;
 }
 
-.profile-img-container img:hover + i {
-    display: block;
-    z-index: 500;
+.comments h3 {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
 }
 
-.profile-img-container i {
-    display: none;
-    position: absolute;
-    margin-left:43%;
-    margin-top:40%;
+.comment-msgs {
+  max-width:500px;
+  max-height:300px;
+  overflow-y: auto;
 }
 
-.profile-img-container img {
-    position:absolute;
+.new-comment {
+  width: 60%;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid black;
 }
+
+.new-comment:focus {
+  outline: none;
+  border: 3px solid #555;
+}
+
+.new-comment input {
+  margin-bottom: 15px;
+}
+
