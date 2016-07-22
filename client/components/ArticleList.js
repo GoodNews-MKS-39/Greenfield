@@ -129,6 +129,13 @@ export default class ArticleList extends React.Component {
       audio.play();
     })
   }
+  changeMood(mood) {
+    this.setState({mood: mood})
+  }
+  redirectToArticle(articleURL) {
+    window.location.href = articleURL;
+  }
+
   renderArticles(articles) {
     // Returning article elements to be displayed
     return articles.map((article) => {
@@ -138,8 +145,13 @@ export default class ArticleList extends React.Component {
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - <a href={article.url} target="_blank">Full article</a></p>
-              <a href="javascript:void(0)" onClick={e => this.openComments(article.title)}>Comments!</a>
+              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - </p>
+              <button type="button" className="button-xsmall pure-button" onClick={(e) =>{
+                e.preventDefault()
+                this.redirectToArticle(article.url)}} target="_blank">Full article</button>
+              <button type="button" className="button-xsmall pure-button" onClick={(e) => {
+                e.preventDefault()
+                this.openComments(article.title)}}>Comments!</button>
             </aside>
           </div>
         </div>
