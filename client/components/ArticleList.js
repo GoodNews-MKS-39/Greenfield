@@ -138,8 +138,10 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              {console.log(Logo.findSourceLogo(article.source))}
-              <img className="source-image" src={Logo.findSourceLogo(article.source)} />
+              <img onClick={this.textToSpeech.bind(null, article.description)} 
+                   className="source-image" src={Logo.findSourceLogo(article.source)} 
+                   onMouseOver={e => e.target.src="/img/sound-recording.png"} 
+                   onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
               <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - </p>
               <button type="button" className="button-xsmall pure-button" onClick={(e) =>{
                 e.preventDefault()
