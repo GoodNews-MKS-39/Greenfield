@@ -64,6 +64,15 @@ h1,h2,h3,h4,h5,h6 {
             color: #ccc;
             text-decoration: none;
         }
+        
+/* Hightlight images on hover */
+.photo-box.u-1.u-med-1-3.u-lrg-1-4:hover {
+    opacity: 1;
+}
+
+.photo-box.u-1.u-med-1-3.u-lrg-1-4 {
+    opacity: 0.8;
+}
 
 .text-box {
     background: rgb(49, 49, 49); /* bluish grey */
