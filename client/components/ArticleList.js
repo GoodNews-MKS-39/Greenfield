@@ -54,7 +54,6 @@ export default class ArticleList extends React.Component {
         // Check to see if there are any more sources to fetch
         if(i < sources.length - 1){
           this.setState({ progressPercent: (i / sources.length) * 100 })
-          console.log(this.state.progressPercent)
           i++;
           // Start recursion again
           getFetchCall.call(this, sources[i])
