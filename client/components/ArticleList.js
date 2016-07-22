@@ -19,7 +19,8 @@ export default class ArticleList extends React.Component {
 
     this.state = {
       showComments: false,
-      progressPercent: 0
+      progressPercent: 0,
+      mood: 'good'
     };
   }
   onlyUnique(value, index, self) {
@@ -136,7 +137,11 @@ export default class ArticleList extends React.Component {
     }
   }
   changeMood(mood) {
-    this.setState({mood: mood})
+    console.log(mood, this.state.mood)
+    if(mood !== this.state.mood){
+      this.setState({mood: mood})
+      this.reverseMood();
+    }
   }
   redirectToArticle(articleURL) {
     window.location.href = articleURL;
@@ -176,7 +181,7 @@ export default class ArticleList extends React.Component {
         <div className="splash-container">
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
-          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
+          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.changeMood.bind(this)}/>
           {!this.state.articles ?
             <div className="progress">
               <span>Loading articles...</span>
