@@ -132,6 +132,10 @@ img.source-image {
   margin-bottom: 15px;
 }
 
+.single_comment p {
+  word-wrap: break-word;
+}
+
 /* ------------Progress Bar--------------- */
 .progress {
   background-color: #1f8dd6;
