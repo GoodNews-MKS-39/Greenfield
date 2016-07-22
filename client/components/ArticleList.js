@@ -184,7 +184,7 @@ export default class ArticleList extends React.Component {
           {!this.state.articles ?
             <div className="progress">
               <span>Loading articles...</span>
-              <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
+              <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#3da8df" />
             </div>
             :
             null}
