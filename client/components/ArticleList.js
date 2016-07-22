@@ -7,14 +7,19 @@ import UserControls from './UserControls.js';
 import Watson from 'watson-developer-cloud'
 import Sentiment from 'sentiment';
 import * as Logo from '../models/sourceLogo.js'
+import RC from 'rc-progress';
+
+var ProgressBar = RC.Line
+var waitingForSpeech = false;
+var audio = new Audio('textToSpeech.wav');
 
 export default class ArticleList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      articles: [],
-      showComments: false
+      showComments: false,
+      progressPercent: 0
     };
   }
   onlyUnique(value, index, self) {
@@ -27,7 +32,7 @@ export default class ArticleList extends React.Component {
     var i = 0;
     var articles = [];
     // Start recursion
-    getFetchCall.call(this);  
+    getFetchCall.call(this);
 
     function getFetchCall() {
       // fetch articles on the current source
@@ -49,6 +54,7 @@ export default class ArticleList extends React.Component {
         articles = articles.concat(result.articles);
         // Check to see if there are any more sources to fetch
         if(i < sources.length - 1){
+          this.setState({ progressPercent: (i / sources.length) * 100 })
           i++;
           // Start recursion again
           getFetchCall.call(this, sources[i])
@@ -118,10 +124,16 @@ export default class ArticleList extends React.Component {
     this.setState({showComments: false})
   }
   textToSpeech(words) {
-    fetchVoice(words).then(something => {
-      var audio = new Audio('textToSpeech.wav');
-      audio.play();
-    })
+    if(!waitingForSpeech){
+      document.body.style.cursor = 'wait';
+      waitingForSpeech = true;
+      fetchVoice(words).then(something => {
+        audio.load();
+        document.body.style.cursor = 'default';
+        waitingForSpeech = false;
+        audio.play();
+      })
+    }
   }
   changeMood(mood) {
     this.setState({mood: mood})
@@ -138,7 +150,8 @@ export default class ArticleList extends React.Component {
           <div>
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
-              <img onClick={this.textToSpeech.bind(null, article.description)} 
+            <img onClick={this.textToSpeech.bind(null, article.description)}
+                   onTouchStart={this.textToSpeech.bind(null, article.description)}
                    className="source-image" src={Logo.findSourceLogo(article.source)} 
                    onMouseOver={e => e.target.src="/img/sound-recording.png"} 
                    onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
@@ -164,14 +177,20 @@ export default class ArticleList extends React.Component {
           <h1 className="splash-head">Have You Heard The News</h1>
           <p  className="splash-subhead">Click source logo to hear the article</p>
           <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles} changeMood={this.reverseMood.bind(this)}/>
+          <div className="progress">
+          {!this.state.articles ?
+            <ProgressBar percent={this.state.progressPercent} strokeWidth="2" strokeColor="#ffffff" />
+            :
+            null}
+          </div>
         </div> 
         {this.state.showComments ? 
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
-        <div className="content-wrapper" >
+        {this.state.articles ? <div className="content-wrapper" >
         {this.renderArticles(this.state.articles)}
-        </div>
+        </div> : ''}
       </div>
     )
   }
@@ -201,6 +220,11 @@ class Comments extends React.Component {
         this.props.updateComments()
       })  
     }
+  }
+
+  componentDidMount(){
+    console.log('live comments woo woo!!!')
+    setInterval(this.props.updateComments, 500);
   }
 
   render() {
