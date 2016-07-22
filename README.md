@@ -23,10 +23,20 @@ News api - https://newsapi.org
 Watson api - http://www.ibm.com/watson/developercloud/text-to-speech.html
 sentiment - https://www.npmjs.com/package/sentiment
 
+# Demo
+
+[Have You Heard The News](https://haveyouheardthenews.herokuapp.com/)
+
 # Backlog
 - Add authentication
 - Search by keyword and date
 - Filter for other 3 emotions (display angry articles)
+
+# Installation
+- To clone master to your machine typing in terminal `git clone` and the web URL then run
+- cd into the folder and type in terminal `npm install` then run
+- after installation is completed then type in `npm start` then run
+- go to localhost:4000 on web browser 
 
 # Details
 ### Components:
@@ -40,9 +50,3 @@ sentiment - https://www.npmjs.com/package/sentiment
 2. /server/apiModels/lib/watson.js: Model dedicated to communicating with Watson api.
 3. /server/apiModels/lib/articles.js: Model dedicated to communicating with MongoDB.
 4. /server/apiModels/articles.js: Houses methods to manipulate database.
-
-### Crontab:
-- Three script files in /server/crontab directory. Should be set to run at least once a day, currently being executed manually.
-1. /server/crontab/fetchDailyArticles.js: Grabs all articles for current day when run.
-2. /server/crontab/fetchWeeklyArtiles.js: Grabs all articles for current week when run (high potential to surpass api call limit).
-3. /server/crontab/fetchTones.js: Looks for articles in database that hasn't been run through Watson and makes that api call.
