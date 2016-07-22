@@ -142,11 +142,13 @@ export default class ArticleList extends React.Component {
             <img className="article" src={article.urlToImage} />
             <aside className="photo-box-caption">
               <img className="source-image" src={Logo.findSourceLogo(article.source)} />
-              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - 
-              <button type="button" onClick={(e) =>{
+              <p onClick={this.textToSpeech.bind(null, article.description)}> { article.title } - </p>
+              <button type="button" className="button-xsmall pure-button" onClick={(e) =>{
                 e.preventDefault()
-                this.redirectToArticle(article.url)}} target="_blank">Full article</button></p>
-              <button onClick={e => this.openComments(article.title)}>Comments!</button>
+                this.redirectToArticle(article.url)}} target="_blank">Full article</button>
+              <button type="button" className="button-xsmall pure-button" onClick={(e) => {
+                e.preventDefault()
+                this.openComments(article.title)}}>Comments!</button>
             </aside>
           </div>
         </div>
