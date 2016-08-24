@@ -7,7 +7,7 @@ STACK:
 ————--------------------------------
 React -- Node -- Express -- MongoDB
 
-For front-end design : React-Bookstrap
+For front-end design : React-Bootstrap
 
 TEAM DEVELOPMENT ROLES
 - Full Stack: Ricardo
