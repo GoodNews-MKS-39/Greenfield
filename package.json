@@ -31,7 +31,7 @@
     "react-modal-dialog": "^3.0.2",
     "request-promise": "^3.0.0",
     "sentiment": "^1.0.6",
-    "watson-developer-cloud": "^1.12.2"
+    "watson-developer-cloud": "^2.2.0"
   },
   "bugs": {
     "url": "https://github.com/GoodNews-MKS-39/Greenfield/issues"

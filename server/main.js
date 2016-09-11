@@ -1,12 +1,12 @@
 "use strict"
-var express     = require('express');
-var path 	    = require('path');
-var browserify  = require('browserify-middleware');
-var bodyParser  = require('body-parser');
-var watson      = require('watson-developer-cloud');
-var fs 		    = require('fs');
-var credentials = require('./watsonCredentials')
-var Comments = require('./comments')
+var express        = require('express');
+var path           = require('path');
+var browserify     = require('browserify-middleware');
+var bodyParser     = require('body-parser');
+var TextToSpeechV1 = require('watson-developer-cloud/text-to-speech/v1');
+var fs             = require('fs');
+var credentials    = require('./watsonCredentials')
+var Comments       = require('./comments')
 
 var app = express();
 
@@ -56,20 +56,21 @@ app.post('/comments', function(req, res) {
 })
 
 app.post('/textToSpeech', function(req, res) {
-	var text_to_speech = watson.text_to_speech({
-	  username: credentials.username,
-	  password: credentials.password,
-	  version: 'v1'
-	});
+  var text_to_speech = new TextToSpeechV1({
+    username: credentials.username,
+    password: credentials.password
+  });
 
 	var params = {
 	  text: req.body.words,
 	  voice: 'en-US_MichaelVoice',
 	  accept: 'audio/wav'
 	};
+
+  console.log(params)
 	// Pipe the synthesized text to a file.
 	var stream = text_to_speech.synthesize(params)
-	stream.pipe(fs.createWriteStream(path.join(__dirname, "../client/public/textToSpeech.wav")));
+	stream.pipe(fs.createWriteStream(path.join(__dirname, "../client/public/textToSpeech.wav"), {flags:'w'}));
 	stream.on('end', function() {
 		res.status(200).send({})
 	})

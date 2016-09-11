@@ -11,7 +11,7 @@ import RC from 'rc-progress';
 
 var ProgressBar = RC.Line
 var waitingForSpeech = false;
-var audio = new Audio('textToSpeech.wav');
+
 
 export default class ArticleList extends React.Component {
   constructor(props) {
@@ -96,7 +96,7 @@ export default class ArticleList extends React.Component {
     .then(source => {
       let sources = [];
       source.forEach(source => {
-        let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk']
+        let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk', "usa-today"]
         if(sourcesToFilter.indexOf(source.id) === -1) {
           sources.push(source);
         }
@@ -125,6 +125,7 @@ export default class ArticleList extends React.Component {
     this.setState({showComments: false})
   }
   textToSpeech(words) {
+    var audio = new Audio('textToSpeech.wav');
     if(!waitingForSpeech){
       document.body.style.cursor = 'wait';
       waitingForSpeech = true;

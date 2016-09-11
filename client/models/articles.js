@@ -20,5 +20,6 @@ export function fetchVoice(words) {
     },
     body: JSON.stringify({words: words})
   }
+
 	return fetch('/textToSpeech', obj).then(resp => resp.json())
 }
