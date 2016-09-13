@@ -8,7 +8,7 @@ export function fetchAllSources() {
 }
 
 export function fetchAllArticles(source) {
-  return fetch(`https://newsapi.org/v1/articles/?source=${source}&apiKey=230b53e7dc294643b8a26493f04f49e0`, { method: 'GET' })
+  return fetch(`https://newsapi.org/v1/articles/?source=${source}&apiKey=7ccff954c320409ca3f73bc45049b2d1`, { method: 'GET' })
       .then(resp => resp.json());
 }
 
@@ -21,5 +21,5 @@ export function fetchVoice(words) {
     body: JSON.stringify({words: words})
   }
 
-	return fetch('/textToSpeech', obj).then(resp => resp.json())
+	return fetch('/textToSpeech', obj).then(() => {})
 }

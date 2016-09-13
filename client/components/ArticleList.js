@@ -11,6 +11,7 @@ import RC from 'rc-progress';
 
 var ProgressBar = RC.Line
 var waitingForSpeech = false;
+var audio = new Audio('textToSpeech.wav');
 
 
 export default class ArticleList extends React.Component {
@@ -22,6 +23,7 @@ export default class ArticleList extends React.Component {
       progressPercent: 0,
       mood: 'good'
     };
+    var audio = new Audio('textToSpeech.wav');
   }
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -96,8 +98,57 @@ export default class ArticleList extends React.Component {
     .then(source => {
       let sources = [];
       source.forEach(source => {
-        let sourcesToFilter = ['buzzfeed', 'redditrall', 'bbcsport', 'googlenews', 'hackernews', 'wiredde', 'theguardianuk', "usa-today"]
-        if(sourcesToFilter.indexOf(source.id) === -1) {
+        let sourcesToFilter = [
+          'ars-technica',
+          'associated-press',
+          'bbc-news',
+          'bbc-sport',
+          'bild',
+          'bloomberg',
+          'buzzfeed',
+          'cnbc',
+          'cnn',
+          'daily-mail',
+          'engadget',
+          'entertainment-weekly',
+          'espn',
+          'espn-cric-info',
+          'financial-times',
+          'focus',
+          'fox-sports',
+          'google-news',
+          'hacker-news',
+          'ign',
+          'independent',
+          'mashable',
+          'metro',
+          'mirror',
+          'new-scientist',
+          'nfl-news',
+          'polygon',
+          'recode',
+          'reddit-r-all',
+          'reuters',
+          'sky-news',
+          'sky-sports-news',
+          'spiegel-online',
+          'talk-sport',
+          'tech-crunch',
+          'tech-radar',
+          'the-guardian-uk',
+          'the-hindu',
+          'the-huffington-post',
+          'the-new-york-times',
+          'the-next-web',
+          'the-telegraph',
+          'the-times-of-india',
+          'the-verge',
+          'the-wallstreet-journal',
+          'the-washington-post',
+          'time',
+        ]
+
+        if(sourcesToFilter.indexOf(source.id) !== -1) {
           sources.push(source);
         }
       })
@@ -105,13 +156,11 @@ export default class ArticleList extends React.Component {
     })
   }
   openComments(title) {
-    console.log('opening comments')
     this.setState({articleTitle: title})
     fetchComments(title)
     .then(comments => {
       this.setState({comments: comments})
       this.setState({showComments: true});
-      console.log('showing comments modal', this.state.showComments)
     })
   }
   updateComments(){
@@ -125,7 +174,6 @@ export default class ArticleList extends React.Component {
     this.setState({showComments: false})
   }
   textToSpeech(words) {
-    var audio = new Audio('textToSpeech.wav');
     if(!waitingForSpeech){
       document.body.style.cursor = 'wait';
       waitingForSpeech = true;
