@@ -6,7 +6,7 @@ import React from 'react';
 
 
 // Import parent app component
-import App from './components/App';
+import ArticleList from './components/ArticleList';
 
 // Render that component to the DOM!
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<ArticleList />, document.getElementById('app'));

@@ -1,0 +1,58 @@
+var logos = {
+  'ars-technica': "http://i.newsapi.org/arstechnica-s.png",
+  'associated-press': "http://i.newsapi.org/associated-press-s.png",
+  'bbc-news': "http://i.newsapi.org/bbc-news-s.png",
+  'bbc-sport': "http://i.newsapi.org/bbc-sport-s.png",
+  'bild': "http://i.newsapi.org/bild-s.png",
+  'bloomberg': "http://i.newsapi.org/bloomberg-s.png",
+  'buzzfeed': "http://i.newsapi.org/buzzfeed-s.png",
+  'cnbc': "http://i.newsapi.org/cnbc-m.png",
+  'cnn': "http://i.newsapi.org/cnn-s.png",
+  'daily-mail': "http://i.newsapi.org/daily-mail-s.png",
+  'engadget': "http://i.newsapi.org/engadget-s.png",
+  'entertainment-weekly': "http://i.newsapi.org/entertainment-weekly-s.png",
+  'espn': "http://i.newsapi.org/espn-s.png",
+  'espn-cric-info': "http://i.newsapi.org/espn-cric-info-s.png",
+  'financial-times': "http://i.newsapi.org/financial-times-s.png",
+  'focus': "http://i.newsapi.org/focus-s.png",
+  'fox-sports': "http://i.newsapi.org/fox-sports-s.png",
+  'google-news': "http://i.newsapi.org/google-news-s.png",
+  'hacker-news': "http://i.newsapi.org/hacker-news-s.png",
+  'ign': "http://i.newsapi.org/ign-s.png",
+  'independent': "http://i.newsapi.org/independent-s.png",
+  'mashable': "http://i.newsapi.org/mashable-s.png",
+  'metro': "http://i.newsapi.org/metro-s.png",
+  'mirror': "http://i.newsapi.org/mirror-s.png",
+  'national-geographic': "http://i.newsapi.org/national-geographic-s.png",
+  'new-scientist': "http://i.newsapi.org/new-scientist-s.png",
+  'nfl-news': "http://i.newsapi.org/nfl-news-s.png",
+  'polygon': "http://i.newsapi.org/polygon-s.png",
+  'recode': "http://i.newsapi.org/recode-s.png",
+  'reddit-r-all': "http://i.newsapi.org/reddit-r-all-s.png",
+  'reuters': "http://i.newsapi.org/reuters-s.png",
+  'sky-news': "http://i.newsapi.org/sky-news-s.png",
+  'sky-sports-news': "http://i.newsapi.org/sky-sports-news-s.png",
+  'spiegel-online': "http://i.newsapi.org/spiegel-online-s.png",
+  'talk-sport': "http://i.newsapi.org/talksport-s.png",
+  'tech-crunch': "http://i.newsapi.org/techcrunch-s.png",
+  'tech-radar': "http://i.newsapi.org/techradar-s.png",
+  'the-guardian-uk': "http://i.newsapi.org/the-guardian-uk-s.png",
+  'the-hindu': "http://i.newsapi.org/the-hindu-s.png",
+  'the-huffington-post': "http://i.newsapi.org/the-huffington-post-s.png",
+  'the-new-york-times': "http://i.newsapi.org/the-new-york-times-s.png",
+  'the-next-web': "http://i.newsapi.org/the-next-web-s.png",
+  'the-telegraph': "http://i.newsapi.org/the-telegraph-s.png",
+  'the-times-of-india': "http://i.newsapi.org/the-times-of-india-s.png",
+  'the-verge': "http://i.newsapi.org/the-verge-s.png",
+  'the-wallstreet-journal': "http://i.newsapi.org/the-wallstreet-journal-s.png",
+  'the-washington-post': "http://i.newsapi.org/the-washington-post-s.png",
+  'time': "http://i.newsapi.org/time-s.png",
+}
+
+export function findSourceLogo(source) {
+  for(var k in logos) {
+    if(k === source) {
+      return logos[k]
+    }
+  }
+}

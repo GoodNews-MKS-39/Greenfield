@@ -1,3 +1,5 @@
 node_modules
 .DS_Store
 ../lib/apiKeys.js
+../client/public/textToSpeech.wav
+bower_components
