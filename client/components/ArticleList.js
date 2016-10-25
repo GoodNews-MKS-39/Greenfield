@@ -205,8 +205,8 @@ export default class ArticleList extends React.Component {
             <aside className="photo-box-caption">
             <img onClick={this.textToSpeech.bind(null, article.description)}
                    onTouchStart={this.textToSpeech.bind(null, article.description)}
-                   className="shake-slow source-image" src={Logo.findSourceLogo(article.source)} 
-                   onMouseOver={e => e.target.src="/img/sound-recording.png"} 
+                   className="shake-slow source-image" src={Logo.findSourceLogo(article.source)}
+                   onMouseOver={e => e.target.src="/img/sound-recording.png"}
                    onMouseLeave={e => e.target.src=Logo.findSourceLogo(article.source)} />
               <p>{article.title}</p>
               <button type="button" className="button-xsmall pure-button" onClick={(e) =>{
@@ -237,8 +237,8 @@ export default class ArticleList extends React.Component {
             </div>
             :
             null}
-        </div> 
-        {this.state.showComments ? 
+        </div>
+        {this.state.showComments ?
           <Comments onClose={this.closeComments.bind(this)} updateComments={this.updateComments.bind(this)} title={this.state.articleTitle} comments={this.state.comments}/>
           :
           null}
@@ -272,7 +272,7 @@ class Comments extends React.Component {
           msg: ''
         })
         this.props.updateComments()
-      })  
+      })
     }
   }
 
