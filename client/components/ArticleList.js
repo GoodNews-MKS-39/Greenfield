@@ -27,6 +27,8 @@ export default class ArticleList extends React.Component{
       <div className='daily_articles'>
         <div className="article_header"> 
           <h1> {"Good News"}</h1>
+          </div>
+          <div className='Cal__Today__root'>
           <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
         </div> 
         { this.state.articles
