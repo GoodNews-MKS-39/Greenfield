@@ -1,25 +1,48 @@
-
 // this houses all the articles after a mood exists
 import React from 'react';
-import { fetchArticles, fetchDatedArticles } from '../dbModels/articles.js';
+import { fetchAllArticles, fetchAllSources, fetchVoice } from '../models/articles.js';
 import UserControls from './UserControls.js';
+import Watson from 'watson-developer-cloud'
 
+var s = require('sentiment');
 
 export default class ArticleList extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      //set initial state of empty array
       articles: []
     };
   }
-
-  componentDidMount() {
-    //after call to db, populate array and modify state
-    fetchArticles()
-    .then((articleData) => {
-      this.setState({articles: articleData});
-    });
+  onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+  }
+  componentWillMount() {
+    this.getSources()
+  }
+  getArticles(source) {
+    fetchAllArticles(source).then((x)=> {
+      x.articles = x.articles.map((article) => {
+        article.source = x.source;
+        var result = s(article.title);
+        article.sentimentScore = result.score;
+        article.sentimentComparative = result.comparative;
+        return article;
+      })
+      this.setState({ articles: this.state.articles.concat(x.articles) })
+    })
+  }
+  removeDuplicates(array) {
+    array.filter(this.onlyUnique)
+  }
+  getSources() {
+    fetchAllSources().then(source => source.forEach(source => this.getArticles(source)))
+  }
+  textToSpeech(words) {
+    fetchVoice(words).then(something => {
+      var audio = new Audio('textToSpeech.wav');
+      audio.play();
+    })
   }
 
   render() {
@@ -27,21 +50,21 @@ export default class ArticleList extends React.Component {
     return (
       <div className='daily_articles'>
         <div className="article_header"> 
-          <h1> {"Good News"}</h1>
-          <UserControls _fetchByDate={this._fetchByDate.bind(this)} />
+          <h1>Good News</h1>
+          <UserControls getArticles={this.getArticles.bind(this)} articles={this.state.articles}/>
         </div> 
-        { this.state.articles
-          .filter(article => article[this.props.mood] > 0.6)
+        {this.state.articles
           .map((article) => {
-            let img = article.multimedia.length > 0 ? (<img src={ "https://static01.nyt.com/" + article.multimedia[1].url } />) : (<img src={ "./img/jad.jpg" } />);
+
             return (
-              <div key={article._id} className="col-sm-6 col-md-4">
+              <div className="col-sm-6 col-md-4">
                 <div className='single_article'>
-                  {img}
-                  <h3> { article.headline.main } - { article.pub_date.slice(0,10) }</h3>
+                  <img src={article.urlToImage} />
+                  <h3> { article.title } - { article.publishedAt }</h3>
                   <div className="article_p">
-                    <p> { article.paragraph } <a href={article.url} target="_blank">(Read more)</a></p>
+                    <p> { article.description } <a href={article.url} target="_blank">(Read more)</a></p>
                   </div>
+                  <button onClick={this.textToSpeech.bind(null, article.description)}> Hear </button>
                 </div>
               </div>
             )
@@ -50,14 +73,4 @@ export default class ArticleList extends React.Component {
       </div>
     )
   }
-
-  _fetchByDate(startDate, endDate) {
-    if (startDate && endDate) {
-      fetchDatedArticles(startDate, endDate)
-      .then((articleData) => {
-        this.setState({articles: articleData});
-      });
-    }
-  }
-
 }
