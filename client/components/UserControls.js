@@ -2,44 +2,23 @@ import React from 'react';
 
 // this component allows the user to control which articles are displayed via date selection
 export default class UserControls extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: '',
-      endDate: ''
-    };
+  handleButtonClick(mood) {
+  	this.props.getArticles;
+  	this.props.changeMood.call(this, mood)
   }
 
   render() {
     return (
       <div className='user-controls'>
-        <form onSubmit={function(e){ e.preventDefault() }}>
-          <input
-            type="text"
-            name="startDate"
-            placeholder="Start Date"
-            value={this.state.startDate}
-            onInput={this._handleStartDateInput.bind(this)}
-          />
-          <input
-            type="text"
-            name="endDate"
-            placeholder="End Date"
-            value={this.state.endDate}
-            onInput={this._handleEndDateInput.bind(this)}
-          />
-        <button onClick={this.props._fetchByDate.bind(this, this.state.startDate, this.state.endDate)}> Search </button>
-        </form>
+        <button className='pure-button pure-button-primary goodNews' onClick={() => {
+          document.title = "Good News"
+          this.handleButtonClick("good")
+        }}>Good News</button>
+        <button className='pure-button pure-button-primary badNews' onClick={() => {
+          document.title = "Bad News"
+          this.handleButtonClick("bad")
+        }}>Bad News</button>
       </div>
     )
   }
-
-  _handleStartDateInput(e) {
-    this.setState({startDate: e.currentTarget.value});
-  }
-
-  _handleEndDateInput(e) {
-    this.setState({endDate: e.currentTarget.value});
-  }
-
 }
